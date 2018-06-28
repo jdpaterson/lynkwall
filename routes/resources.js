@@ -9,12 +9,8 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("resources")
-<<<<<<< HEAD
       .then((results) => {
-=======
-      .then((results) => {  
->>>>>>> 846f472f84937d883d79998b94e3f688c8e3a388
-        //res.json(results);
+         //res.json(results);
         res.render("index", {resources: results})
     });
   });

@@ -1,16 +1,29 @@
-<form>
-  <div class="grid-container">
-    <div class="grid-x grid-padding-x">
-      <div class="medium-6 cell">
-        <label>Input Label
-          <input type="text" placeholder=".medium-6.cell">
-        </label>
-      </div>
-      <div class="medium-6 cell">
-        <label>Input Label
-          <input type="text" placeholder=".medium-6.cell">
-        </label>
+<div id="newResourceForm" class="reveal" data-reveal>
+  <form method="POST" action="/resources/new">
+    <div class="grid-container grid-container-padded">
+      <div class="grid-y grid-padding-y">
+        <div class="medium-6 cell">
+          <label>Subject
+            <input type="text" name="title" placeholder="Title">
+          </label>
+          <label>Description
+            <input type="text" name="description" placeholder="Description">
+          </label>
+          <label>URL
+            <input type="text" name="URL" placeholder="URL">
+          </label>
+        </div>
       </div>
     </div>
-  </div>
-</form>
+    <div class="grid-container grid-container-padded">
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-12 medium-6 large-1">
+          <button type="submit" class="button">Submit</button>
+        </div>
+        <div class="cell small-12 medium-6 large-11">
+          <a type="button" class="button">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
