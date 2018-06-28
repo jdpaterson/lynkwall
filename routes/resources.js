@@ -9,29 +9,24 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("resources")
-<<<<<<< HEAD
       .then((results) => {
-         //res.json(results);
-=======
-      .then((results) => {  
         // res.json(results);
->>>>>>> master
         res.render("index", {resources: results})
     });
   });
 
   router.post("/new", (req, res) => {
-     
+
     knex('resources')
       .insert({
-        URL: req.body.URL, 
+        URL: req.body.URL,
         title: req.body.title,
         description: req.body.description,
         imageURL: req.body.imageURL,
         creator_id: req.body.creator_id
       })
       res.redirect('/');
-       
+
   });
 
   return router;
