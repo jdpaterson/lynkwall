@@ -15,5 +15,15 @@ module.exports = (knex) => {
     });
   });
 
+  router.get("/new", (req, res) => {
+    knex
+      .select("*")
+      .from("resources")
+      .then((results) => {  
+        //res.json(results);
+        res.render("index", {resources: results})
+    });
+  });
+
   return router;
 }
