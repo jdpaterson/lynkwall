@@ -15,5 +15,19 @@ module.exports = (knex) => {
     });
   });
 
+  router.post("/new", (req, res) => {
+     
+    knex('resources')
+      .insert({
+        URL: req.body.URL, 
+        title: req.body.title,
+        description: req.body.description,
+        imageURL: req.body.imageURL,
+        creator_id: req.body.creator_id
+      })
+      res.redirect('/');
+       
+  });
+
   return router;
 }
