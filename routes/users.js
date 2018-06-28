@@ -15,17 +15,19 @@ module.exports = (knex) => {
   });
 
   router.get ("/:userid/resources", (req, res) => {   // get all resources created by a user
-    const resources_created = knex
-    .select("*")
-    .from("users")
-    .where("creator", userid);
+    knex
+      .select("*")
+      .from("resources")
+      .where("creator_id", userid);
+      res.json(results);
   })
 
   router.get ("/:userid/likes", (req, res) => {   // get all likes for a user
-    const resources_liked = knex
-    .select("*")
-    .from ("likes")
-    .where("user_id", userid);
+    knex
+      .select("*")
+      .from ("likes")
+      .where("user_id", userid);
+      res.json(results);
   })
 
   return router;
