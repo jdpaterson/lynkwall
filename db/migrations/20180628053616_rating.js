@@ -1,8 +1,7 @@
-//don't run this one
 exports.up = function(knex, Promise) {  
   return Promise.all([
     knex.schema.createTable('rating', function (table) {
-      table.string('rating_id');
+      table.increments('rating_id');
       table.integer('rate');
       table.date('created_on');
       table.date('updated_on'); 
