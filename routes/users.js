@@ -20,7 +20,7 @@ module.exports = (knex) => {
     .from("users")
     .where("creator", userid);
   })
-  
+
   router.get ("/:userid/likes", (req, res) => {   // get all likes for a user
     const resources_liked = knex
     .select("*")

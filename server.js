@@ -41,7 +41,15 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+
+  res.render("index",{
+    resources: [{
+      title: 'Card Title',
+      description: 'Card Description',
+      imageURL: 'http://via.placeholder.com/300x150',
+      URL: 'http://jpatersonRules.com'
+    }],
+  });
 });
 
 app.listen(PORT, () => {
