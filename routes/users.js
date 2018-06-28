@@ -19,15 +19,15 @@ module.exports = (knex) => {
       .select("*")
       .from("resources")
       .where("creator_id", userid);
-      //res.json(results);
+      res.json(results);
   })
 
   router.get ("/:userid/likes", (req, res) => {   // get all likes for a user
     knex
-      .select("*")  
+      .select("*")
       .from ("likes")
       .where("user_id", userid);
-      //res.json(results);
+      res.json(results);
   })
 
   return router;
