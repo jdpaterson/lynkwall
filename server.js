@@ -38,9 +38,10 @@ app.use(express.static("public"));
 
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
+app.use("/", resourcesRoutes(knex));
 
 // Home page
-app.get("/", (req, res) => {
+/*app.get("/", (req, res) => {
 
   res.render("index",{
     resources: [{
@@ -50,7 +51,7 @@ app.get("/", (req, res) => {
       URL: 'http://jpatersonRules.com'
     }],
   });
-});
+});*/
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
