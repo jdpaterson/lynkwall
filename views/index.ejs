@@ -3,25 +3,28 @@
 <% include partials/_head %>
   <body>
       <% include partials/_top-bar %>
-      <div class="grid-container" >
-        <div class="grid-x grid-margin-y grid-margin-x grid-padding-x grid-padding-y" >
-        <% for (let res in resources){ %>
-          <div class="card  small-auto cell" style="width: 300px;">
-            <div class="card-divider">
-              <%= resources[res].title %>
 
-            </div>
-            <img alt="Resource image" src="<%=resources[res].imageURL">
+      <% console.log('resources length', resources.length); %>
+      <div class="grid-container" >
+        <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
+        <% for (let res of resources){ %>
+
+          <div class="card cell small-4" style="width: 300px;">
+            <img class="thumbnail" alt="Resource image" src="<%=res.imageURL%>">
             <div class="card-section">
-              <p><%= resources[res].description %></p>
-              <a class="button expanded" href="<%=resources[res].URL" >Read More</a>
+              <h4><%= res.title %></h4>
+              <a class="float-right">
+                <i class="far fa-thumbs-up"></i>
+              </a>
+
+              <p><%= res.description %></p>
+              <a class="button expanded" href="<%=res.URL %>" >Read More</a>
             </div>
           </div>
         <% } %>
         </div>
 
       </div>
-
-    <% include partials/_footerScripts %>
+     <% include partials/_footerScripts %>
   </body>
 </html>
