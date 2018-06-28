@@ -27,3 +27,14 @@
 
 - Node 5.10.x or above
 - NPM 3.8.x or above
+
+## Migration order
+- Must perform migration 1,2,3,4 in this exact order
+- Don't use 20180628050751_rating.js
+1 - create_users_table.js
+2 - create_resources.js
+3 - categories.js
+4 - categories_resources.js
+5 - likes.js
+6 - comments.js
+7 - rating.js
