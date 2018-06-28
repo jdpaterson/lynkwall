@@ -19,17 +19,12 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("resources")
-<<<<<<< HEAD
-      .where("creator_id", userid);
-      res.json(results);
-=======
       .where("creator_id", userid)
       .then((results) => {
-        res.json(results); 
+        res.json(results);
       }).catch((err)=> {
         console.log('AAAAAAAHHH', err)
       })
->>>>>>> master
   })
 
   router.get ("/:userid/likes", (req, res) => {   // get all likes for a user
@@ -37,17 +32,12 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from ("likes")
-<<<<<<< HEAD
-      .where("user_id", userid);
-      res.json(results);
-=======
       .where("user_id", userid)
       .then((results) => {
-        res.json(results);        
+        res.json(results);
       }).catch((err) => {
         console.log ('aaaaaarrgghh', err)
       })
->>>>>>> master
   })
 
   return router;
