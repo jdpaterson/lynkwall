@@ -80,15 +80,15 @@ module.exports = (knex) => {
   router.post("/:resourceid/likes", (req, res) => {
 
     const resId = req.params.resourceid;
-    const userId = req.body.userid;
-    console.log('Posting resourceId: ', resId);
-    console.log('Posting userId: ', userId);
+    //Needs to be changed once we implement Users/Cookies
+    const userId = 1;
+
     knex('likes')
       .insert({
         resource_id: resId,
         user_id: userId
-      })
-      .then();
+      });
+      
   });
 
   return router;
