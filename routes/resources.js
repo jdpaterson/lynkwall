@@ -50,16 +50,20 @@ module.exports = (knex) => {
   router.post("/:resourceid/comments", (req, res) => {
      console.log('inside post ');
      console.log('rg body is', req.body);
+
+     const {conment_text, created_on, updated_on, resource_id, user_id} = req.body;
     knex('comment')
-      .insert({
-        
-        comment_text: req.body.comment_text, 
-        created_on: req.body.created_on,
-        updated_on: req.body.updated_on,
-        resource_id: req.body.resource_id,
-        user_id: req.body.user_id
-      })
-      res.redirect('/');
+    .insert({
+      comment_tex, 
+      created_on,
+      updated_on,
+      resource_id,
+      user_id
+    })
+    .then();
+    
+    
+    return res.redirect('/');
        
   });
 
