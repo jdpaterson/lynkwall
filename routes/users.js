@@ -47,7 +47,7 @@ module.exports = (knex) => {
       return res.redirect('/');
     })
   })
- 
+
 
 
 
