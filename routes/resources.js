@@ -44,17 +44,18 @@ module.exports = (knex) => {
     });
   });
 
-  router.post("/", (req, res) => {
-
+  router.post("/new", (req, res) => {
+    console.log(req.body);
     knex('resources')
       .insert({
         URL: req.body.URL,
         title: req.body.title,
         description: req.body.description,
-        imageURL: req.body.imageURL,
         creator_id: req.body.creator_id
       })
-      res.redirect('/');
+      .then((response) => {
+        res.redirect('/');
+      });
 
   });
 
