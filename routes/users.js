@@ -39,7 +39,7 @@ module.exports = (knex) => {
         console.log('aaaaaarrgghh', err)
       })
   })
-  router.post("/new", (req, res) => {   // create new resource 
+  router.post("/new", (req, res) => {   // create new resource
     const name = req.body.name;
     knex ('resources')
       .insert({name: name})

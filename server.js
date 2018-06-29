@@ -37,6 +37,10 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Mount all resource routes
+
+app.use("resources", resourcesRoutes(knex));
+app.use("/api/users", usersRoutes(knex));
+
 // Home page
 app.get("/", (req, res) => {
   knex
@@ -47,10 +51,10 @@ app.get("/", (req, res) => {
     .select("*")
     .from("categories")
     .then((results2) => {
-      return res.json({results, results2}); 
+      return res.json({results, results2});
       //res.render("index", {resources: results})
+    });
   });
-});
 });
 app.use("/api/users", usersRoutes(knex));
 app.use('/resources/',resourcesRoutes(knex));
