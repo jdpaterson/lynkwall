@@ -17,6 +17,7 @@ const knexLogger  = require('knex-logger');
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const resourcesRoutes = require("./routes/resources");
+const apiCategoriesRoutes = require("./routes/api_categories");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -38,28 +39,29 @@ app.use(express.static("public"));
 
 // Mount all resource routes
 
-app.use("resources", resourcesRoutes(knex));
-app.use("/api/users", usersRoutes(knex));
+app.use("/resources", resourcesRoutes(knex));
+app.use("/users", usersRoutes(knex));
+app.use("/api/v1/categories", apiCategoriesRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
   knex
   .select("*")
   .from("resources")
-  .then((results) => {
+  .then((resources) => {
     knex
     .select("*")
     .from("categories")
-    .then((results2) => {
+    .then((categories) => {
       //return res.json({results, results2});
-      res.render("index", {resources: results})
+      res.render("index",
+      {
+        resources: resources,
+        categories: categories
+      });
     });
   });
 });
-app.use("/api/users", usersRoutes(knex));
-app.use('/resources/',resourcesRoutes(knex));
-
-
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

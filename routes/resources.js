@@ -40,7 +40,7 @@ module.exports = (knex) => {
       .where("resource_id", resource_id )
       .then((results) => {
         res.json(results);
-       // res.render("index", {resources: results}) -what is the page for comment
+       // res.render("index", {resources: results})
     });
   });
 
@@ -63,7 +63,7 @@ module.exports = (knex) => {
     const {conment_text, created_on, updated_on, resource_id, user_id} = req.body;
     knex('comment')
     .insert({
-      comment_tex,
+      comment_text,
       created_on,
       updated_on,
       resource_id,
@@ -74,6 +74,20 @@ module.exports = (knex) => {
 
     return res.redirect('/');
 
+  });
+
+  router.post("/:resourceid/likes", (req, res) => {
+
+    const resId = req.params.resourceid;
+    const userId = req.body.userid;
+    console.log('Posting resourceId: ', resId);
+    console.log('Posting userId: ', userId);
+    knex('likes')
+      .insert({
+        resource_id: resId,
+        user_id: userId
+      })
+      .then();
   });
 
   return router;
