@@ -9,7 +9,7 @@
       <div class="grid-container" >
         <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
         <% for (let res of resources){ %>
-          <%console.log(res);%>
+          <%console.log(res.resource_id);%>
           <div class="card cell small-4" style="width: 300px;">
             <img class="thumbnail" alt="Resource image" src="<%=res.imageURL%>">
             <div class="card-section">
@@ -19,7 +19,7 @@
               </a>
               <p><%= res.description %></p>
               <a class="button expanded" href="<%=res.URL %>" >Read More</a>
-              <a href="/resources/<%=res.resource_id%/comments>" >View Comments</a>
+              <a href="/resources/<%= res.resource_id %>/comments">View Comments</a>
             </div>
           </div>
         <% } %>

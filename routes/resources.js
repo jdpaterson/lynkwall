@@ -14,7 +14,7 @@ module.exports = (knex) => {
         .select("*")
         .from("categories")
         .then((results2) => {
-          return res.json({results, results2}); 
+          return res.json({results, results2});
           //res.render("index", {resources: results})
       });
     });
@@ -27,9 +27,9 @@ module.exports = (knex) => {
       .select("*")
       .from("comments")
       .where("resource_id", resource_id )
-      .then((results) => {  
-        res.json(results);
-       // res.render("index", {resources: results}) -what is the page for comment
+      .then((results) => {
+        //res.json(results);
+        res.render("comments", {comments: results});
     });
   });
 
@@ -54,17 +54,17 @@ module.exports = (knex) => {
      const {conment_text, created_on, updated_on, resource_id, user_id} = req.body;
     knex('comment')
     .insert({
-      comment_tex, 
+      comment_tex,
       created_on,
       updated_on,
       resource_id,
       user_id
     })
     .then();
-    
-    
+
+
     return res.redirect('/');
-       
+
   });
 
   return router;
