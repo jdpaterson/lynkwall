@@ -43,8 +43,11 @@ module.exports = (knex) => {
     const name = req.body.name;
     knex ('resources')
       .insert({name: name})
-})
-res.redirect('/');
+      .then(results => {
+      return res.redirect('/');
+    })
+  })
+ 
 
 
 
