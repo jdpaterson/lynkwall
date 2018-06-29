@@ -38,8 +38,10 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Mount all resource routes
+app.use(resourcesRoutes(knex));
 app.use("/api/users", usersRoutes(knex));
-app.use("/", resourcesRoutes(knex));
+app.use(commentsRoutes(knex));
+
 
 // Home page
 /*app.get("/", (req, res) => {
