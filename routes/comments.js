@@ -20,7 +20,6 @@ module.exports = (knex) => {
       
   router.get("/:resourceid", (req, res) => {
     const resource_id = req.params.resourceid;
-    console.log('Here I am!');
     knex
       .select("*")
       .from("comments")
@@ -30,15 +29,15 @@ module.exports = (knex) => {
     });
   });
 
-  router.post("/new", (req, res) => {
-
+  router.post("/:resourceid/new", (req, res) => {
+    const resource_id = req.params.resourceid;
     knex('comments')
       .insert({
         comment_text: req.body.comment_text,
         created_on: req.body.created_on,
         updated_on: null,
-        resource_id: req.body.resource_id,
-        user_id: req.body.user_id
+        resource_id: resource_id,
+        user_id: 1 //hardcoded for now
       }).then((result)=>{
       res.redirect('/');
     });
