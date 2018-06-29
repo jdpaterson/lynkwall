@@ -1,0 +1,25 @@
+.comment-section-container {
+  background-color: #eee;
+  padding: 0.5em;
+}
+
+.comment-section-author {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.comment-section-author .comment-section-name {
+  margin-left: 1rem;
+}
+
+.comment-section-author .comment-section-name p {
+  margin-bottom: 0;
+}
+
+.comment-section-box {
+  background-color: #aaa;
+  padding: 0.5em;
+}
+
+
