@@ -15,6 +15,8 @@ module.exports = (knex) => {
         res.json(results);
         //res.render("index", {resources: results})
 
+      })
+    })
       
   router.get("/:resourceid", (req, res) => {
     const resource_id = req.params.resourceid;
