@@ -2,7 +2,7 @@
 
 ## REST Routes
 
-### User 
+### User
 Request | Response
 ------------ | -------------
 **HOME** | index (GET)
@@ -18,7 +18,5 @@ Request | Response
 **RESOURCE** /resource/new | resources (POST)
 **RESOURCE** /resources/:userID | resource_for_user (GET)
 **RESOURCE** /resource/:resourceID/category/:categoryID | resourceAddTopic (POST)
-**RESOURCE**/category/:categoryID/resources | 
-**RESOURCE** /resources/:resourceID/rate 
-
- 
+**RESOURCE**/category/:categoryID/resources |
+**RESOURCE** /resources/:resourceID/rate

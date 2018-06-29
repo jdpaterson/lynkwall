@@ -5,20 +5,24 @@
       <% include partials/_top-bar %>
 
       <% console.log('resources length', resources.length); %>
+      <% include partials/_newResource.ejs %>
       <div class="grid-container" >
         <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
         <% for (let res of resources){ %>
 
           <div class="card cell small-4" style="width: 300px;">
-            <img class="thumbnail" alt="Resource image" src="<%=res.imageURL%>">
+            <div class="card-divider">
+              This is a header
+            </div>
+            <img class="thumbnail" alt="Resource image" src="http://via.placeholder.com/150x150" />
             <div class="card-section">
               <h4><%= res.title %></h4>
-              <a class="float-right">
+              <a data-res_id="<%=res.resource_id%>" class="like-button float-right">
                 <i class="far fa-thumbs-up"></i>
               </a>
-
               <p><%= res.description %></p>
               <a class="button expanded" href="<%=res.URL %>" >Read More</a>
+              <a href="/resources/<%= res.resource_id %>/comments">View Comments</a>
             </div>
           </div>
         <% } %>
