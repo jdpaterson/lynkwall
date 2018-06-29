@@ -47,8 +47,8 @@ app.get("/", (req, res) => {
     .select("*")
     .from("categories")
     .then((results2) => {
-      return res.json({results, results2}); 
-      //res.render("index", {resources: results})
+      //return res.json({resources: results, categories: results2});
+      res.render("index", {resources: results})
   });
 });
 });
