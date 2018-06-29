@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<% include partials/_head %>
+<body>
+  <% include partials/_top-bar %>
+    <% for (comment of comments){
+      <div class="callout secondary">
+        <p><%=comment.comment_text%></p>
+      </div>
+    <%}%>
+
+  <% include partials/_footerScripts %>
+</body>
+</html>
