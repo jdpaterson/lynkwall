@@ -9,7 +9,7 @@
         <ul class="submenu menu vertical" data-submenu>
             <% if (locals.categories !== undefined) { %>
               <% for (cat of locals.categories){ %>
-              <li><a href="#0"><%=cat.category%></a></li>
+              <li><a href="/categories/<%=cat.category_id%>/resources"><%=cat.category%></a></li>
               <% } %>
             <% } %>
           </ul>

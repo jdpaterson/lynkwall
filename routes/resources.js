@@ -50,13 +50,12 @@ module.exports = (knex) => {
       .insert({
         URL: req.body.URL,
         title: req.body.title,
-        description: req.body.description,        
+        description: req.body.description,
         creator_id: req.body.creator_id
       })
       .then((response) => {
         res.redirect('/');
       });
-
 
   });
 
