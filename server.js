@@ -46,13 +46,17 @@ app.get("/", (req, res) => {
   knex
   .select("*")
   .from("resources")
-  .then((results) => {
+  .then((resources) => {
     knex
     .select("*")
     .from("categories")
-    .then((results2) => {
+    .then((categories) => {
       //return res.json({results, results2});
-      res.render("index", {resources: results})
+      res.render("index",
+      {
+        resources: resources,
+        categories: categories
+      });
     });
   });
 });

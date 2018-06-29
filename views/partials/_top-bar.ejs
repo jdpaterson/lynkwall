@@ -6,9 +6,9 @@
       <li class="has-submenu">
         <a href="#0">Categories</a>
         <ul class="submenu menu vertical" data-submenu>
-          <li><a href="#0">Cat1</a></li>
-          <li><a href="#0">Cat2</a></li>
-          <li><a href="#0">Cat3</a></li>
+          <% for (cat of categories){ %>
+          <li><a href="#0"><%=cat.category%></a></li>
+          <% } %>
         </ul>
       </li>
       <li><a href="/resources/">My Resources</a></li>

@@ -40,7 +40,7 @@ module.exports = (knex) => {
       .where("resource_id", resource_id )
       .then((results) => {
         res.json(results);
-       // res.render("index", {resources: results}) -what is the page for comment
+       // res.render("index", {resources: results})
     });
   });
 
