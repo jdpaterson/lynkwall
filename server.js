@@ -30,7 +30,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
   src: __dirname + "/styles",
-  dest: __dirname + "/public/styles",
+  dest: __dirname + "/public/css",
   debug: true,
   outputStyle: 'expanded'
 }));
