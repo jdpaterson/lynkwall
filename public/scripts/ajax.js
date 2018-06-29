@@ -1,15 +1,18 @@
 $(document).ready(function() {
+  /*$.get('/api/v1/categories', (data) => {
+    const categories = data;
+  });*/
+
+
   $('.like-button').on('click', function(ev) {
-      //console.log(ev.delegateTarget.dataset.res_id);
+
       let data = {
         resourceid: ev.delegateTarget.dataset.res_id,
-        userid: 1
+        userid: loggedInUserId
       };
 
       $.post(`/resources/${data.resourceid}/likes`, data);
-
       $(ev.delegateTarget).children('i').toggleClass('far');
       $(ev.delegateTarget).children('i').toggleClass('fas');
-
   });
 })
