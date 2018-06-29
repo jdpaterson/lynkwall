@@ -21,7 +21,6 @@ module.exports = (knex) => {
   });
 
   router.get("/:resourceid/comments", (req, res) => {
-    console.log(req.baseUrl)
     const resource_id = req.params.resourceid;
     knex
       .select("*")
@@ -30,6 +29,18 @@ module.exports = (knex) => {
       .then((results) => {
         //res.json(results);
         res.render("comments", {comments: results});
+    });
+  });
+
+  router.get("/:resourceid/likes", (req, res) => {
+    const resource_id = req.params.resourceid;
+    knex
+      .count('like_id')
+      .from("likes")
+      .where("resource_id", resource_id )
+      .then((results) => {
+        res.json(results);
+       // res.render("index", {resources: results}) -what is the page for comment
     });
   });
 
@@ -48,10 +59,8 @@ module.exports = (knex) => {
   });
 
   router.post("/:resourceid/comments", (req, res) => {
-     console.log('inside post ');
-     console.log('rg body is', req.body);
 
-     const {conment_text, created_on, updated_on, resource_id, user_id} = req.body;
+    const {conment_text, created_on, updated_on, resource_id, user_id} = req.body;
     knex('comment')
     .insert({
       comment_tex,
