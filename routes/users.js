@@ -19,25 +19,36 @@ module.exports = (knex) => {
   router.get("/:userid/resources", (req, res) => {
     console.log('Getting!');
     const userid = req.params.userid;
+    const userLikes = [];
     knex
       .select("*")
-      .from("resources")
-      .where("creator_id", userid)
-      .then((resources) => {
+      .from("likes")
+      .where('user_id', 1)
+      .then((likes) => {
+        for (let like of likes){
+          userLikes.push(like.resource_id);
+        }
         knex
           .select("*")
-          .from("categories")
-          .then((categories) => {
-            //console.log(categories);
-            // return res.json(resources);
-            res.render("index", {
-               resources: resources,
-               categories: categories
-            });
-      }).catch((err) => {
-        console.log(err)
-      })
-    })
+          .from("resources")
+          .where("creator_id", userid)
+          .orWhereIn("resource_id", userLikes)
+          .then((resources) => {
+            knex
+              .select("*")
+              .from("categories")
+              .then((categories) => {
+                res.render("index", {
+                   resources: resources,
+                   categories: categories
+                });
+          }).catch((err) => {
+            console.log(err)
+          })
+        })
+      });
+
+
   });
 
   // Get all likes for a user
