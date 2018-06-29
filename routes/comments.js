@@ -12,7 +12,7 @@ module.exports = (knex) => {
       .from("comments")
       .where("resource_id", resource_id )
       .then((results) => {  
-        // res.json(results);
+        res.json(results);
        // res.render("index", {resources: results}) -what is the page for comment
     });
   });
