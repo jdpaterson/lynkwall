@@ -1,8 +1,8 @@
 "use strict";
 
-const express = require('express');
+const express = require("express");
 const router  = express.Router();
-const moment = require('moment');
+const moment = require("moment");
 
 module.exports = (knex) => {
 
@@ -21,6 +21,29 @@ module.exports = (knex) => {
     });
   });
 
+  router.get("/search", (req, res) => {
+    const query = req.query.queryStr;
+    console.log('Query: ', query);
+    knex
+      .select("*")
+      .from("resources")
+      .where("title", "like", `%${query}%`)
+      .orWhere("description", "like", `%${query}%`)
+      .orWhere("url", "like", `%${query}%`)
+      .then((resources) => {
+        console.log(resources);
+        knex
+          .select("*")
+          .from("categories")
+          .then((categories) => {
+            res.render("index", {
+              resources: resources,
+              categories: categories
+            })
+          })
+      })
+  })
+
   router.get("/:resourceid/comments", (req, res) => {
     const resource_id = req.params.resourceid;
     knex
@@ -34,16 +57,15 @@ module.exports = (knex) => {
         .where("resource_id", resource_id )
         .then((resources) => {
           return res.render("comments", {comments, resources});
-          //res.render("index", {resources: results})
       });
     });
   });
-  
+
 
   router.get("/:resourceid/likes", (req, res) => {
     const resource_id = req.params.resourceid;
     knex
-      .count('like_id')
+      .count("like_id")
       .from("likes")
       .where("resource_id", resource_id )
       .then((results) => {
@@ -53,7 +75,7 @@ module.exports = (knex) => {
   });
 
   router.post("/new", (req, res) => {
-    knex('resources')
+    knex("resources")
       .insert({
         URL: req.body.URL,
         title: req.body.title,
@@ -61,7 +83,7 @@ module.exports = (knex) => {
         creator_id: req.body.creator_id
       })
       .then((response) => {
-        res.redirect('/');
+        res.redirect("/");
       });
 
   });
@@ -69,7 +91,7 @@ module.exports = (knex) => {
   router.post("/:resourceid/comments", (req, res) => {
 
     const {conment_text, created_on, updated_on, resource_id, user_id} = req.body;
-    knex('comment')
+    knex("comment")
     .insert({
       comment_text,
       created_on,
@@ -80,7 +102,7 @@ module.exports = (knex) => {
     .then();
 
 
-    return res.redirect('/');
+    return res.redirect("/");
 
   });
 
@@ -89,25 +111,25 @@ module.exports = (knex) => {
     const resId = req.params.resourceid;
     //Needs to be changed once we implement Users/Cookies
     const userId = 1;
-    const now = moment().format('YYYY MM DD');
+    const now = moment().format("YYYY MM DD");
 
     //If a like exists then delete it , else add a new one.
     knex
-      .select('*')
-      .from('likes')
+      .select("*")
+      .from("likes")
       .where({
         user_id: userId,
         resource_id: resId
       }).then((results)=>{
         if (results.length === 0){
-          knex('likes')
+          knex("likes")
             .insert({
               resource_id: resId,
               user_id: userId,
               created_on: now
             }).then((insert)=>{});
         }else{
-          knex('likes')
+          knex("likes")
             .where({
               resource_id: resId,
               user_id: userId
