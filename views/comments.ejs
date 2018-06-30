@@ -34,28 +34,44 @@
           </div>
         <% } %>
         </div>
-  <h3>Comments (2)</h3>
+  <h3>Comments (<%=comments.length%>)</h3>
+  <!-- <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
+      <% for (let comment of comments){ %>
+      <div class="comment-section-author">
+        <img src="https://placehold.it/50x50" alt="">
+        <div class="comment-section-name">
+          <h5><a href="">userid: <%=comment.user_id%></a></h5>
+          <p><%=comment.created_on%></p>
+        </div>
+      </div>
+        <div class="comment-section-text">
+          <p><%=comment.comment_text%></p>
+        </div>
+      <% } %>
+  </div> -->
+  <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" > 
+  <% for (let comment of comments){ %>
   <div class="comment-section-author">
     <img src="https://placehold.it/50x50" alt="">
     <div class="comment-section-name">
-      <h5><a href="">Janice Jones</a></h5>
-      <p>March 12, 2017 at 1:28pm</p>
+      <h5><a href=""><%=comment.user_id%></a></h5>
+      <p><%=comment.created_on%></p>
     </div>
   </div>
   <div class="comment-section-text">
     <p><%=comment.comment_text%>
     </p>
   </div>
-  <div class="comment-section-author">
+  <!-- <div class="comment-section-author">
     <img src="https://placehold.it/50x50" alt="">
     <div class="comment-section-name">
-      <h5><a href="">Janice Jones</a></h5>
-      <p>March 12, 2017 at 1:28pm</p>
+      <h5><a href=""><%=comment.user_id%></a></h5>
+      <p><%=comment.created_on%></p>
     </div>
   </div>
   <div class="comment-section-text">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum facilis tenetur a voluptatibus quia deserunt.
-    </p>
-  </div>
+    <p><%=comment.comment_text%> </p>
+  </div> -->
 </div>
+<% } %>
 <!--/comments-->
