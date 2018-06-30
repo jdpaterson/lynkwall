@@ -1,6 +1,14 @@
+body {
+  font-family: 'Cardo', serif;
+}
+
 .comment-section-container {
   background-color: #eee;
   padding: 2em;
+}
+
+h5 {
+  font-family: 'Montserrat', sans-serif;
 }
 
 .comment-section-author {
