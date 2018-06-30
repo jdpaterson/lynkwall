@@ -16,8 +16,7 @@ module.exports = (knex) => {
         const resource_ids = [];
         for (let cat of categories_resources){
           resource_ids.push(cat.resource_id);
-        }
-        console.log(resource_ids);
+        }        
         knex
           .select("*")
           .from("resources")

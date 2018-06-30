@@ -16,8 +16,7 @@ module.exports = (knex) => {
   });
 
   // Get all resources created by a user
-  router.get("/:userid/resources", (req, res) => {
-    console.log('Getting!');
+  router.get("/:userid/resources", (req, res) => {    
     const userid = req.params.userid;
     const userLikes = [];
     knex
