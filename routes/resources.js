@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router  = express.Router();
+const moment = require('moment');
 
 module.exports = (knex) => {
 
@@ -45,7 +46,6 @@ module.exports = (knex) => {
   });
 
   router.post("/new", (req, res) => {
-    console.log(req.body);
     knex('resources')
       .insert({
         URL: req.body.URL,
@@ -80,15 +80,33 @@ module.exports = (knex) => {
   router.post("/:resourceid/likes", (req, res) => {
 
     const resId = req.params.resourceid;
-    const userId = req.body.userid;
-    console.log('Posting resourceId: ', resId);
-    console.log('Posting userId: ', userId);
-    knex('likes')
-      .insert({
-        resource_id: resId,
-        user_id: userId
-      })
-      .then();
+    //Needs to be changed once we implement Users/Cookies
+    const userId = 1;
+    const now = moment().format('YYYY MM DD');
+
+    //If a like exists then delete it , else add a new one.
+    knex
+      .select('*')
+      .from('likes')
+      .where({
+        user_id: userId,
+        resource_id: resId
+      }).then((results)=>{
+        if (results.length === 0){
+          knex('likes')
+            .insert({
+              resource_id: resId,
+              user_id: userId,
+              created_on: now
+            }).then((insert)=>{});
+        }else{
+          knex('likes')
+            .where({
+              resource_id: resId,
+              user_id: userId
+            }).del().then((count) => {});
+        }
+      });
   });
 
   return router;

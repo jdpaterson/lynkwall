@@ -9,7 +9,7 @@ module.exports = (knex) => {
     const userid = req.params.userid;
     knex
       .select("*")
-      .from("comments")
+      .from("likes")
       .where("user_id", userid)
       .then((results) => {  
         res.json(results);
@@ -22,7 +22,7 @@ module.exports = (knex) => {
     const resource_id = req.params.resourceid;
     knex
       .select("*")
-      .from("comments")
+      .from("likes")
       .where("resource_id", resource_id )
       .then((results) => {
         res.json(results);
@@ -31,9 +31,8 @@ module.exports = (knex) => {
 
   router.post("/:resourceid/new", (req, res) => {
     const resource_id = req.params.resourceid;
-    knex('comments')
+    knex('likes')
       .insert({
-        comment_text: req.body.comment_text,
         created_on: req.body.created_on,
         updated_on: null,
         resource_id: resource_id,

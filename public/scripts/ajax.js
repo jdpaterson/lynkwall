@@ -1,15 +1,14 @@
 $(document).ready(function() {
-  /*$.get('/api/v1/categories', (data) => {
-    const categories = data;
-  });*/
-
 
   $('.like-button').on('click', function(ev) {
 
       let data = {
         resourceid: ev.delegateTarget.dataset.res_id,
+<<<<<<< HEAD
         // userid: loggedInUserId
         userid: 1
+=======
+>>>>>>> 86ea1e724e0581e26a79c99a92e4f78e807a13ed
       };
 
       $.post(`/resources/${data.resourceid}/likes`, data);
