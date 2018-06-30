@@ -18,16 +18,6 @@ module.exports = (knex) => {
       })
     })
       
-  // router.get("/:resourceid", (req, res) => {
-  //   const resource_id = req.params.resourceid;
-  //   knex
-  //     .select("*")
-  //     .from("comments")
-  //     .where("resource_id", resource_id )
-  //     .then((results) => {
-  //       res.json(results);
-  //   });
-  // });
   router.get("/:resourceid", (req, res) => {
     const resource_id = req.params.resourceid;
     knex

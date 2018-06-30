@@ -38,19 +38,7 @@ module.exports = (knex) => {
       });
     });
   });
-
-
-  // router.get("/:resourceid/comments", (req, res) => {
-  //   const resource_id = req.params.resourceid;
-  //   knex
-  //     .select("*")
-  //     .from("comments")
-  //     .where("resource_id", resource_id )
-  //     .then((results) => {
-  //       //res.json(results);
-  //       res.render("comments", {comments: results});
-  //   });
-  // });
+  
 
   router.get("/:resourceid/likes", (req, res) => {
     const resource_id = req.params.resourceid;
