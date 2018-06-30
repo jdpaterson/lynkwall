@@ -10,7 +10,7 @@
         <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
         <% for (let res of resources){ %>
 
-          <div class="card cell small-4" style="width: 300px;">
+          <div class="card cell small-3" style="width: 300px;">
             <div class="card-divider">
               This is a header
             </div>
@@ -23,6 +23,7 @@
               <p><%= res.description %></p>
               <a class="button expanded" target="_blank" href="<%=res.URL %>" >Read More</a>
               <a href="/resources/<%= res.resource_id %>/comments">View Comments</a>
+              <span><i class="far fa-star"></i></span>
             </div>
           </div>
         <% } %>
