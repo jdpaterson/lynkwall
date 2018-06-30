@@ -8,7 +8,8 @@ $(document).ready(function() {
 
       let data = {
         resourceid: ev.delegateTarget.dataset.res_id,
-        userid: loggedInUserId
+        // userid: loggedInUserId
+        userid: 1
       };
 
       $.post(`/resources/${data.resourceid}/likes`, data);

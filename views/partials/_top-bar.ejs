@@ -1,12 +1,12 @@
 <% const loggedInUserId = 1 %>
 <div class="top-bar top-bar-padding" id="responsive-menu">
   <div class="top-bar-left">
-    <ul class="menu" data-dropdown-menu>
+    <ul class="dropdown menu" data-dropdown-menu>
       <li class="menu-text">lynkWall</li>
       <li ><a href="/">Browse</a></li>
       <li class="has-submenu">
         <a href="#0">Categories</a>
-        <ul class="submenu menu vertical" data-submenu>
+        <ul class="menu" data-submenu>
             <% if (locals.categories !== undefined) { %>
               <% for (cat of locals.categories){ %>
               <li><a href="/categories/<%=cat.category_id%>/resources"><%=cat.category%></a></li>
