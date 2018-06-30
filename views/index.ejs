@@ -17,7 +17,7 @@
             <div class="card-divider">
              <h5>This is a header</h5>
             </div>
-            <img class="thumbnail" alt="Resource image" src="http://via.placeholder.com/150x150" />
+            <img class="thumbnail" style="height: 150px;width: 150px;" alt="Resource image" src="https://upload.wikimedia.org/wikipedia/commons/e/e9/CH_Buck_and_Sons_Evita_Peron.jpg" />
             <div class="card-section">
               <h4><%= res.title %></h4>
               <form action="/resources/resourceid/likes" method="POST">
@@ -29,7 +29,7 @@
               <a class="button expanded" target="_blank" href="<%=res.URL %>" >Read More</a>
               <a href="/resources/<%=res.resource_id%>/comments" class="float-right">View Comments</a>
               <form action="/resources/resourceid/rating" method="POST">
-                <button> <a data-res_id="<%=res.resource_id%>" class="rating-button float-left"> 
+                <button> <a data-res_id="<%=res.resource_id%>" class="rating-button float-left">
                   <br>
                   <div class="rating">
                     <label>
@@ -62,5 +62,3 @@
      <% include partials/_footerScripts %>
   </body>
 </html>
-
-
