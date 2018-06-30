@@ -36,6 +36,7 @@ $(document).ready(function() {
 
   $('.rating input').change(function () {
     var $radio = $(this);
+    console.log('CLICKED')
     $('.rating .selected').removeClass('selected');
     $radio.closest('label').addClass('selected');
   });
