@@ -47,8 +47,6 @@ module.exports = (knex) => {
           })
         })
       });
-
-
   });
 
   // Get all likes for a user
