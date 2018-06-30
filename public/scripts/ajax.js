@@ -1,14 +1,11 @@
 $(document).ready(function() {
 
   $('.like-button').on('click', function(ev) {
-
+      const loggedInUserId = 1;
       let data = {
         resourceid: ev.delegateTarget.dataset.res_id,
-<<<<<<< HEAD
-        // userid: loggedInUserId
-        userid: 1
-=======
->>>>>>> 86ea1e724e0581e26a79c99a92e4f78e807a13ed
+        userid: loggedInUserId
+        // userid: 1
       };
 
       $.post(`/resources/${data.resourceid}/likes`, data);
