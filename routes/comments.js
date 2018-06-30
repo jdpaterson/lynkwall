@@ -22,10 +22,17 @@ module.exports = (knex) => {
     const resource_id = req.params.resourceid;
     knex
       .select("*")
-      .from("comments")
-      .where("resource_id", resource_id )
+      .from("resources")
+      .where("resource_id", resource_id)
       .then((results) => {
-        res.json(results);
+        knex
+        .select("*")
+        .from("comments")
+        .where("resource_id", resource_id)
+        .then((results2) => {
+          return res.json({results, results2});
+          //res.render("index", {resources: results})
+      });
     });
   });
 

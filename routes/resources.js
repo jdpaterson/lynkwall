@@ -27,11 +27,18 @@ module.exports = (knex) => {
       .select("*")
       .from("comments")
       .where("resource_id", resource_id )
-      .then((results) => {
-        //res.json(results);
-        res.render("comments", {comments: results});
+      .then((comments) => {
+        knex
+        .select("*")
+        .from("resources")
+        .where("resource_id", resource_id )
+        .then((resources) => {
+          return res.render("comments", {comments, resources});
+          //res.render("index", {resources: results})
+      });
     });
   });
+  
 
   router.get("/:resourceid/likes", (req, res) => {
     const resource_id = req.params.resourceid;
