@@ -27,11 +27,11 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("resources")
-      .then((results) => {
+      .then((resources) => {
         knex
         .select("*")
         .from("categories")
-        .then((results2) => {
+        .then((categories) => {
           knex
             .select("resource_id")
             .count("like_id as like_count")
@@ -40,7 +40,7 @@ module.exports = (knex) => {
             .whereIn('resource_id', function() {
               this.select('resource_id').from('resources')
             })
-            .then( (results3)=> {
+            .then( (likecount)=> {
               knex
                .select("resource_id")
                .count("comment_id as comment_count")
@@ -49,7 +49,7 @@ module.exports = (knex) => {
                .whereIn('resource_id', function() {
                  this.select('resource_id').from('resources')
                })
-               .then((results4) => {
+               .then((commentcount) => {
                 knex
                 .select("resource_id")
                 .avg("rate as rating_avg")
@@ -58,9 +58,9 @@ module.exports = (knex) => {
                 .whereIn('resource_id', function() {
                   this.select('resource_id').from('resources')
                 })
-                .then((results5) => {
-                  console.log(results5);
-                  return res.json({results, results2, results3, results4, results5});
+                .then((ratingaverage) => {
+                  
+                  return res.json({resources, categories, likecount, commentcount, ratingaverage});
                 })
                   
               })
