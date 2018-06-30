@@ -6,7 +6,24 @@ const moment = require('moment');
 
 module.exports = (knex) => {
 
+  // router.get("/", (req, res) => {
+  //   knex
+  //     .select("*")
+  //     .from("resources")
+  //     .then((results) => {
+  //       knex
+  //       .select("*")
+  //       .from("categories")
+  //       .then((results2) => {
+
+  //         return res.json({results, results2});
+  //         //res.render("index", {resources: results})
+  //     });
+  //   });
+  // });
+
   router.get("/", (req, res) => {
+    const countStr = 'select resource_id from resources'
     knex
       .select("*")
       .from("resources")
@@ -15,8 +32,42 @@ module.exports = (knex) => {
         .select("*")
         .from("categories")
         .then((results2) => {
-          return res.json({results, results2});
-          //res.render("index", {resources: results})
+          knex
+            .select("resource_id")
+            .count("like_id as like_count")
+            .from("likes")
+            .groupBy("resource_id")
+            .whereIn('resource_id', function() {
+              this.select('resource_id').from('resources')
+            })
+            .then( (results3)=> {
+              knex
+               .select("resource_id")
+               .count("comment_id as comment_count")
+               .from("comments")
+               .groupBy("resource_id")
+               .whereIn('resource_id', function() {
+                 this.select('resource_id').from('resources')
+               })
+               .then((results4) => {
+                knex
+                .select("resource_id")
+                .avg("rate as rating_avg")
+                .from("rating")
+                .groupBy("resource_id")
+                .whereIn('resource_id', function() {
+                  this.select('resource_id').from('resources')
+                })
+                .then((results5) => {
+                  console.log(results5);
+                  return res.json({results, results2, results3, results4, results5});
+                })
+                  
+              })
+               
+            })
+           
+          //res.render("index", {resources: results, categories: results2, countlikes: result3})
       });
     });
   });
