@@ -107,7 +107,16 @@ module.exports = (knex) => {
         .from("resources")
         .where("resource_id", resource_id )
         .then((resources) => {
-          return res.render("comments", {comments, resources});
+          knex
+          .select("name")
+          .from("users")
+          .whereIn("id", function(){
+            this.select('user_id').from('comments').where("resource_id", resource_id);
+          })
+          .then((users)=> {
+            return res.render("comments", {comments, resources, users});
+        })
+           
       });
     });
   });
