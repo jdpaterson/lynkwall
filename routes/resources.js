@@ -59,7 +59,7 @@ module.exports = (knex) => {
                   this.select('resource_id').from('resources')
                 })
                 .then((ratingaverage) => {
-                  console.log(results5);
+                  
                   return res.json({resources, categories, likecount, commentcount, ratingaverage});
                 })
                   
