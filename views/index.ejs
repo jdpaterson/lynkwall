@@ -29,8 +29,25 @@
               <a class="button expanded" target="_blank" href="<%=res.URL %>" >Read More</a>
               <a href="/resources/<%=res.resource_id%>/comments" class="float-right">View Comments</a>
               <form action="/resources/resourceid/rating" method="POST">
-                <button> <a data-res_id="<%=res.resource_id%>" class="rating-button float-left">
-                    <i class="far fa-star"></i>
+                <button> <a data-res_id="<%=res.resource_id%>" class="rating-button float-left"> 
+                  <br>
+                  <div class="rating">
+                    <label>
+                      <input type="radio" name="rating" value="5" title="5 stars"> 5
+                    </label>
+                    <label>
+                      <input type="radio" name="rating" value="4" title="4 stars"> 4
+                    </label>
+                    <label>
+                      <input type="radio" name="rating" value="3" title="3 stars"> 3
+                    </label>
+                    <label>
+                      <input type="radio" name="rating" value="2" title="2 stars"> 2
+                    </label>
+                    <label>
+                      <input type="radio" name="rating" value="1" title="1 star"> 1
+                    </label>
+                  </div>
                   </a>
                 </button>
               </form>
@@ -45,3 +62,5 @@
      <% include partials/_footerScripts %>
   </body>
 </html>
+
+

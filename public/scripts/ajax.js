@@ -12,4 +12,10 @@ $(document).ready(function() {
       $(ev.delegateTarget).children('i').toggleClass('far');
       $(ev.delegateTarget).children('i').toggleClass('fas');
   });
+
+  $('.rating input').change(function () {
+    var $radio = $(this);
+    $('.rating .selected').removeClass('selected');
+    $radio.closest('label').addClass('selected');
+  });
 })
