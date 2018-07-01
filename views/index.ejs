@@ -6,7 +6,7 @@
 
       <% console.log('resources length', resources.length); %>
       <% include partials/_newResource.ejs %>
-      <div class="grid-container" style="margin-top:1em">
+      <div class="grid-container " style="margin-top:1em">
         <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
           <% if (locals.resources === undefined){ %>
             <p>No resources found...</p>
@@ -31,7 +31,11 @@
               <div class="our-icons" style="display: flex; justify-content: space-between;">
                   <div>
                       <i class="far fa-thumbs-up"></i>
+                      <span>
+                          <i class="fas fa-tags"></i>
+                      </span>
                   </div> 
+ 
                   <div class="rating">
                       <label>
                         <input type="radio" value="5" title="5 stars"> 5
