@@ -1,7 +1,7 @@
 $(document).ready(function() {
   const resCards = $(".resource-card");
   const resIds = {};
-  console.log(resCards[0]);
+
   for (let i = 0; i < resCards.length; i++){
     resIds[i] = resCards[i].dataset.resource_id;
   }
@@ -20,12 +20,14 @@ $(document).ready(function() {
     dropdown.css('display', 'none');
     dropdown.fadeIn('slow');
   });
+
   $('#primary-menu').on(
     'hide.zf.dropdownmenu', function() {
       var dropdown = $(this).find('.is-dropdown-submenu');
       dropdown.css('display', 'inherit');
       dropdown.fadeOut('slow');
   });
+
   $('.has-submenu .menu li').hover(
     function(){
       $(this).css('background-color', '#bababa');
@@ -50,8 +52,16 @@ $(document).ready(function() {
 
   $('.rating input').change(function () {
     var $radio = $(this);
-    console.log('CLICKED')
     $('.rating .selected').removeClass('selected');
     $radio.closest('label').addClass('selected');
   });
+
+  $('.rating input').on('click', function(){
+    const parentCard = $(this).parents('div .resource-card');
+    const resId = parentCard[0].dataset.resource_id;
+    const rating = $(this).val();
+    console.log(rating);
+    $.post(`/resources/${resId}/rating`, {resourceId: resId, rate: rating});
+  });
+
 })
