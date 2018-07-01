@@ -40,7 +40,7 @@ module.exports = (knex) => {
                 knex
                 .select("resource_id")
                 .avg("rate as rating_avg")
-                .from("rating")
+                .from("ratings")
                 .groupBy("resource_id")
                 .whereIn('resource_id', function() {
                   this.select('resource_id').from('resources')
@@ -233,33 +233,33 @@ module.exports = (knex) => {
 
   router.post("/:resourceid/rating", (req, res) => {
     const resource_id = req.params.resourceid;
-    const newRating = req.body.rate;
+    const newRating = req.body.rating;
     const user_id = 1;
     const now = moment().format("YYYY MM DD");
 
     knex
       .select("*")
-      .from("rating")
+      .from("ratings")
       .where({
         resource_id: resource_id,
         user_id: user_id
       }).then((ratings) => {
         if (ratings.length !== 0){
           ratings[0].rating_id;
-          knex('rating')
+          knex('ratings')
             .where({rating_id: ratings[0].rating_id})
             .update({
-              rate: newRating,
+              rating: newRating,
               updated_on: now
             }).then((res)=>{
               return res;
             });
         }else{
-          knex('rating')
+          knex('ratings')
             .insert({
               resource_id: resource_id,
               user_id: user_id,
-              rate: newRating,
+              rating: newRating,
               created_on: now
             }).then((res)=>{
               return res;

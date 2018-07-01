@@ -4,10 +4,9 @@ exports.up = function(knex, Promise) {
       table.increments('resource_id');
       table.string('url');
       table.string('title');
-      table.string('description');
+      table.text('description');
       table.string('image_url');
       table.integer('creator_id').unsigned().notNullable();;
-
       table.foreign('creator_id').references('id').inTable('users');
     })
   ])
