@@ -35,20 +35,6 @@
         <% } %>
         </div>
   <h3>Comments (<%= Object.keys(userObj).length %>)</h3>
-  <!-- <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
-      <% for (let comment of comments){ %>
-      <div class="comment-section-author">
-        <img src="https://placehold.it/50x50" alt="">
-        <div class="comment-section-name">
-          <h5><a href="">userid: <%=comment.user_id%></a></h5>
-          <p><%=comment.created_on%></p>
-        </div>
-      </div>
-        <div class="comment-section-text">
-          <p><%=comment.comment_text%></p>
-        </div>
-      <% } %>
-  </div> -->
   <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" > 
   <% for (let index in userObj ){ %>
   <div class="comment-section-author">
@@ -62,17 +48,28 @@
     <p><%=userObj[index].commentText%>
     </p>
   </div>
-  <!-- <div class="comment-section-author">
-    <img src="https://placehold.it/50x50" alt="">
-    <div class="comment-section-name">
-      <h5><a href=""><%=comment.user_id%></a></h5>
-      <p><%=comment.created_on%></p>
-    </div>
-  </div>
-  <div class="comment-section-text">
-    <p><%=comment.comment_text%> </p>
-  </div> -->
 </div>
 <% } %>
 
+<!-- comment form -->
+<form class="comment-section-form" action="/resources/resourceid/comment" method="POST">
+    <div class="comment-section-box">
+      <div class="row">"
+        <div class="small-12 column">
+          <h4>Leave a Comment</h4>
+          <label>Name
+            <input type="text">
+          </label>
+          <label>Email
+            <input type="text">
+          </label>
+          <label>Comment
+            <textarea rows="10" type="text"></textarea>
+          </label>
+          <button class="button expanded">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!--/comment box-->
 <!--/comments-->
