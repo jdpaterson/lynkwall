@@ -120,10 +120,33 @@ module.exports = (knex) => {
     });
   });
 
+  router.get("/:resourceid/categories", (req, res) => {
+    const resource_id = req.params.resourceid;
+    knex
+      .select("category_id")
+      .from("categories_resources")
+      .where("resource_id", resource_id )
+      .then((results) => {
+        const catId = results[0].category_id;
+        console.log('result is ', catId);
+        knex
+        .select("category")
+        .from("categories")
+        .where("category_id", catId )
+        .then((results2) => {
+          const category = results2
+          console.log(results2);
+          console.log('-----');
+          res.render('tagCategory',category);
+      } )
+
+       // res.render("index", {resources: results})
+    });
+  });
+
   router.post("/new", (req, res) => {
     request(`http://api.linkpreview.net/?key=${urlPreviewKey}&q=${req.body.url}`, function (error, response, body) {
       const jsonResp = JSON.parse(body);
-      console.log('Title: ', jsonResp.title);
       //res.redirect("/");
       knex("resources")
         .returning("resource_id")
@@ -157,21 +180,18 @@ module.exports = (knex) => {
       });
 
 
-  router.post("/:resourceid/comments", (req, res) => {
+  router.post("/:resource_id/comments", (req, res) => {
 
-    const {conment_text, created_on, updated_on, resource_id, user_id} = req.body;
-    knex("comment")
+    const now = moment().format('YYYY MM DD');
+    knex("comments")
     .insert({
-      comment_text,
-      created_on,
-      updated_on,
-      resource_id,
-      user_id
+      comment_text: req.body.comment_text,
+      created_on: now,
+      updated_on: now,
+      resource_id: req.params.resource_id,
+      user_id: user_id
     })
-    .then();
-
-
-    return res.redirect("/");
+    .then(res.redirect('/'));
 
   });
 
@@ -179,7 +199,6 @@ module.exports = (knex) => {
 
     const resId = req.params.resourceid;
     //Needs to be changed once we implement Users/Cookies
-    const userId = 1;
     const now = moment().format("YYYY MM DD");
 
     //If a like exists then delete it , else add a new one.
@@ -187,21 +206,21 @@ module.exports = (knex) => {
       .select("*")
       .from("likes")
       .where({
-        user_id: userId,
+        user_id: user_id,
         resource_id: resId
       }).then((results)=>{
         if (results.length === 0){
           knex("likes")
             .insert({
               resource_id: resId,
-              user_id: userId,
+              user_id: user_id,
               created_on: now
             }).then((insert)=>{});
         }else{
           knex("likes")
             .where({
               resource_id: resId,
-              user_id: userId
+              user_id: user_id
             }).del().then((count) => {});
         }
       });
