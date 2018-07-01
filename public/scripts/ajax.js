@@ -6,6 +6,15 @@ $(document).ready(function() {
     resIds[i] = resCards[i].dataset.resource_id;
   }
 
+  $.get('/api/v1/likes/resources', resIds, function(likes){
+    for (let like of likes){
+      const resCard = $(`[data-resource_id="${rating.resource_id}"]`);
+      
+
+
+    }
+  })
+
   $.get('/api/v1/likes/resources/user', resIds, function(likes){
     for (let like of likes){
       const likeAnchor = $(`[data-res_id="${like.resource_id}"]`);

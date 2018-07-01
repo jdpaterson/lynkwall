@@ -18,7 +18,7 @@
              <!-- <h5>This is a header</h5> -->
              <h4><%= res.title %></h4>
             </div>
-            <img class="thumbnail" style="height: 150px;width: 150px;" alt="Resource image" src="https://upload.wikimedia.org/wikipedia/commons/e/e9/CH_Buck_and_Sons_Evita_Peron.jpg" />
+            <img class="thumbnail" style="height: 150px;width: 150px;" alt="Resource image" src="<%=res.image_url%>" />
             <div class="card-section">
               <h4><%= res.title %></h4>
               <!-- <a data-res_id="<%=res.resource_id%>" class="like-button float-right">
@@ -60,7 +60,7 @@
             </div>
           <% } %>
           <% } %>
-          </div>                
+          </div>
       </div>
      <% include partials/_footerScripts %>
   </body>
