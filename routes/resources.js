@@ -7,22 +7,6 @@ const utility = require('../utility');
 const user_id = 1;
 module.exports = (knex) => {
 
-  // router.get("/", (req, res) => {
-  //   knex
-  //     .select("*")
-  //     .from("resources")
-  //     .then((results) => {
-  //       knex
-  //       .select("*")
-  //       .from("categories")
-  //       .then((results2) => {
-
-  //         return res.json({results, results2});
-  //         //res.render("index", {resources: results})
-  //     });
-  //   });
-  // });
-
   router.get("/", (req, res) => {
     const countStr = 'select resource_id from resources'
     knex
@@ -144,7 +128,7 @@ module.exports = (knex) => {
         creator_id: req.body.creator_id
       })
       .then((resource_id) => {
-         
+
         knex
         .select("category_id")
         .from("categories")
@@ -155,16 +139,16 @@ module.exports = (knex) => {
           .insert({
             category_id: dbResponse[0].category_id,
             resource_id: resource_id[0]
-         
+
           })
           .then( () => {
             res.redirect("/");
           } )
 
         })
-         
+
       });
- 
+
   });
 
   router.post("/:resourceid/comments", (req, res) => {
