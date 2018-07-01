@@ -34,7 +34,7 @@
           </div>
         <% } %>
         </div>
-  <h3>Comments (<%=comments.length%>)</h3>
+  <h3>Comments (<%= Object.keys(userObj).length %>)</h3>
   <!-- <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
       <% for (let comment of comments){ %>
       <div class="comment-section-author">
@@ -50,16 +50,16 @@
       <% } %>
   </div> -->
   <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" > 
-  <% for (let comment of comments){ %>
+  <% for (let index in userObj ){ %>
   <div class="comment-section-author">
     <img src="https://placehold.it/50x50" alt="">
     <div class="comment-section-name">
-      <h5><a href=""><%=comment.user_id%></a></h5>
-      <p><%=comment.created_on%></p>
+      <h5><a href=""><%= userObj[index].userName%></a></h5>
+      <!-- <p><%=userObj[index].commentText%></p> -->
     </div>
   </div>
   <div class="comment-section-text">
-    <p><%=comment.comment_text%>
+    <p><%=userObj[index].commentText%>
     </p>
   </div>
   <!-- <div class="comment-section-author">
@@ -74,4 +74,5 @@
   </div> -->
 </div>
 <% } %>
+
 <!--/comments-->

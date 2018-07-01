@@ -3,6 +3,7 @@
 const express = require("express");
 const router  = express.Router();
 const moment = require("moment");
+const utility = require('../utility');
 
 module.exports = (knex) => {
 
@@ -108,13 +109,14 @@ module.exports = (knex) => {
         .where("resource_id", resource_id )
         .then((resources) => {
           knex
-          .select("name")
+          .select("*")
           .from("users")
           .whereIn("id", function(){
             this.select('user_id').from('comments').where("resource_id", resource_id);
           })
           .then((users)=> {
-            return res.render("comments", {comments, resources, users});
+            let userObj = utility.createObj(users, comments);
+            return res.render("comments", {comments, resources, userObj});
         })
            
       });
