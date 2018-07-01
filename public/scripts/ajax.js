@@ -67,21 +67,6 @@ $(document).ready(function() {
       $(ev.delegateTarget).children('i').toggleClass('far');
       $(ev.delegateTarget).children('i').toggleClass('fas');
   });
-  
-  //this is for the category
-  $('.tag-button').on('click', function(ev) {
-     
-    alert('tag button click with resource_id: ' + ev.delegateTarget.dataset.res_id);
-    // let data = {
-    //   resourceid: ev.delegateTarget.dataset.res_id,
-    //   userid: loggedInUserId
-    //   // userid: 1
-    // };
-
-    // $.post(`/resources/${data.resourceid}/likes`, data);
-    // $(ev.delegateTarget).children('i').toggleClass('far');
-    // $(ev.delegateTarget).children('i').toggleClass('fas');
-});
 
 
   $('.rating input').on('click', function(){

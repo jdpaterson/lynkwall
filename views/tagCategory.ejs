@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<% include partials/_head %>
+<body>
+  <% include partials/_top-bar %>
+  <% const loggedInUserId = 1 %>
+
+  <div class="grid-container grid-container-padded">
+      <div class="grid-y grid-padding-y">
+        <div class="medium-6 cell">
+          <label>URL
+            <input type="url" name="url" placeholder="https://www." />
+          </label>
+          <label>Select category</label>
+          <fieldset>
+              <input id="radio1" name="category" type="radio" value="Academic"><label for="radio1">Academic</label>
+              <input id="radio2" name="category" type="radio" value="Tutorial"><label for="radio2">Tutorial</label>
+              <input id="radio3" name="category" type="radio" value="Blog"><label for="radio3">Blog</label>
+            </fieldset>
+              <input type="hidden" name="creator_id" value="<%=loggedInUserId%>" />
+        </div>
+      </div>
+    </div>
+    <div class="grid-container grid-container-padded">
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-12 medium-6 large-2 ">
+          <button type="submit" class="button">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+  <% include partials/_footerScripts %>
+</body>
+</html>
+ 

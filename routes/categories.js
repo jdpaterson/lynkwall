@@ -39,7 +39,7 @@ module.exports = (knex) => {
 
     router.post("/:resourceid/new", (req, res) => {
       const resource_id = req.params.resourceid;
-      const category_id; //todo here
+      //const category_id; //todo here
       knex('categories')
         .insert({
           category_id: req.body.created_on,

@@ -120,6 +120,30 @@ module.exports = (knex) => {
     });
   });
 
+  router.get("/:resourceid/categories", (req, res) => {
+    const resource_id = req.params.resourceid;
+    knex
+      .select("category_id")
+      .from("categories_resources")
+      .where("resource_id", resource_id )
+      .then((results) => {
+        const catId = results[0].category_id;
+        console.log('result is ', catId);
+        knex
+        .select("category")
+        .from("categories")
+        .where("category_id", catId )
+        .then((results2) => {
+          const category = results2
+          console.log(results2);
+          console.log('-----');
+          res.render('tagCategory',category);
+      } )
+         
+       // res.render("index", {resources: results})
+    });
+  });
+
   router.post("/new", (req, res) => {
     request(`http://api.linkpreview.net/?key=${urlPreviewKey}&q=${req.body.url}`, function (error, response, body) {
       const jsonResp = JSON.parse(body);
