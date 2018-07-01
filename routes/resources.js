@@ -211,8 +211,8 @@ module.exports = (knex) => {
         resource_id: resource_id,
         user_id: user_id
       }).then((ratings) => {
-        ratings[0].rating_id;
         if (ratings.length !== 0){
+          ratings[0].rating_id;
           knex('rating')
             .where({rating_id: ratings[0].rating_id})
             .update({
@@ -221,7 +221,7 @@ module.exports = (knex) => {
             }).then((res)=>{
               return res;
             });
-        }else{          
+        }else{
           knex('rating')
             .insert({
               resource_id: resource_id,

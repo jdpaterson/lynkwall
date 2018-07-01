@@ -5,7 +5,6 @@ const router = express.Router();
 
 module.exports = (knex) => {
 
-  // Get all users
   router.get("/", (req, res) => {
     knex
       .select("*")
@@ -27,7 +26,7 @@ module.exports = (knex) => {
       .from("likes")
       .whereIn("resource_id", resIds )
       .andWhere("user_id", 1)
-      .then((likes) => {        
+      .then((likes) => {
         res.json(likes);
       })
   })

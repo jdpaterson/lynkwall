@@ -7,12 +7,21 @@ $(document).ready(function() {
   }
 
   $.get('/api/v1/likes/resources/user', resIds, function(likes){
-      for (let like of likes){
-        const likeAnchor = $(`[data-res_id="${like.resource_id}"]`);
-        likeAnchor.children('i').toggleClass('far');
-        likeAnchor.children('i').addClass('fas');
-      }
+    for (let like of likes){
+      const likeAnchor = $(`[data-res_id="${like.resource_id}"]`);
+      likeAnchor.children('i').toggleClass('far');
+      likeAnchor.children('i').addClass('fas');
+    }
   });
+
+  $.get('/api/v1/ratings/resources/user', resIds, function(ratings){
+    for (let rating of ratings){
+      const resCard = $(`[data-resource_id="${rating.resource_id}"]`);
+      const rate = rating.rate;
+      const stars = resCard.find('.rating label').toArray().reverse();
+      $(stars[rate - 1]).addClass('selected');
+    }
+  })
 
   $('#primary-menu').on(
   'show.zf.dropdownmenu', function() {
@@ -60,7 +69,7 @@ $(document).ready(function() {
     const parentCard = $(this).parents('div .resource-card');
     const resId = parentCard[0].dataset.resource_id;
     const rating = $(this).val();
-    console.log(rating);
+    console.log(parentCard);
     $.post(`/resources/${resId}/rating`, {resourceId: resId, rate: rating});
   });
 
