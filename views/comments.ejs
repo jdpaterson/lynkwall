@@ -10,8 +10,6 @@
 </body>
 </html>
 
-
-<!-- comments -->
 <div class="comment-section">
     <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
         <% for (let res of resources){ %>
@@ -35,7 +33,7 @@
         <% } %>
         </div>
   <h3>Comments (<%= Object.keys(userObj).length %>)</h3>
-  <div class="grid-x grid-margin-x grid-padding-x grid-padding-y comment-section" > 
+  <div class="grid-x grid-margin-x grid-padding-x grid-padding-y comment-section" >
   <% for (let index in userObj ){ %>
   <div class="author">
     <img src="https://placehold.it/50x50" alt="">
@@ -51,25 +49,17 @@
 </div>
 <% } %>
 
-<!-- comment form -->
-<form class="comment-section" action="/resources/resourceid/comment" method="POST">
+<form class="comment-section" action="/resources/<%=resources[0].resource_id%>/comments"
+  method="POST">
     <div class="box">
       <div class="row">
         <div class="small-12 column">
           <h4>Leave a Comment</h4>
-          <label>Name
-            <input type="text">
-          </label>
-          <label>Email
-            <input type="text">
-          </label>
           <label>Comment
-            <textarea rows="10" type="text"></textarea>
+            <textarea rows="5" name="comment_text" type="text"></textarea>
           </label>
           <button class="button expanded">Submit</button>
         </div>
       </div>
     </div>
   </form>
-  <!--/comment box-->
-<!--/comments-->
