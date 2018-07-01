@@ -47,7 +47,7 @@
 .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
-  width: 9em;
+  
 }
 
 .rating input {
