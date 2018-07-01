@@ -1,4 +1,18 @@
 $(document).ready(function() {
+  const resCards = $(".resource-card");
+  const resIds = {};
+  console.log(resCards[0]);
+  for (let i = 0; i < resCards.length; i++){
+    resIds[i] = resCards[i].dataset.resource_id;
+  }
+
+  $.get('/api/v1/likes/resources/user', resIds, function(likes){
+      for (let like of likes){
+        const likeAnchor = $(`[data-res_id="${like.resource_id}"]`);
+        likeAnchor.children('i').toggleClass('far');
+        likeAnchor.children('i').addClass('fas');
+      }
+  });
 
   $('#primary-menu').on(
   'show.zf.dropdownmenu', function() {

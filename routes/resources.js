@@ -3,6 +3,7 @@
 const express = require("express");
 const router  = express.Router();
 const moment = require("moment");
+const utility = require('../utility');
 
 module.exports = (knex) => {
 
@@ -59,14 +60,14 @@ module.exports = (knex) => {
                   this.select('resource_id').from('resources')
                 })
                 .then((ratingaverage) => {
-                  
+
                   return res.json({resources, categories, likecount, commentcount, ratingaverage});
                 })
-                  
+
               })
-               
+
             })
-           
+
           //res.render("index", {resources: results, categories: results2, countlikes: result3})
       });
     });
@@ -74,7 +75,6 @@ module.exports = (knex) => {
 
   router.get("/search", (req, res) => {
     const query = req.query.queryStr;
-    console.log('Query: ', query);
     knex
       .select("*")
       .from("resources")
@@ -82,7 +82,6 @@ module.exports = (knex) => {
       .orWhere("description", "like", `%${query}%`)
       .orWhere("url", "like", `%${query}%`)
       .then((resources) => {
-        console.log(resources);
         knex
           .select("*")
           .from("categories")
@@ -108,15 +107,16 @@ module.exports = (knex) => {
         .where("resource_id", resource_id )
         .then((resources) => {
           knex
-          .select("name")
+          .select("*")
           .from("users")
           .whereIn("id", function(){
             this.select('user_id').from('comments').where("resource_id", resource_id);
           })
           .then((users)=> {
-            return res.render("comments", {comments, resources, users});
+            let userObj = utility.createObj(users, comments);
+            return res.render("comments", {comments, resources, userObj});
         })
-           
+
       });
     });
   });
@@ -137,7 +137,7 @@ module.exports = (knex) => {
   router.post("/new", (req, res) => {
     knex("resources")
       .insert({
-        URL: req.body.URL,
+        url: req.body.url,
         title: req.body.title,
         description: req.body.description,
         creator_id: req.body.creator_id
