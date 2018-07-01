@@ -9,7 +9,7 @@ module.exports = (knex) => {
     const userid = req.params.userid;
     knex
       .select("*")
-      .from("rating")
+      .from("ratings")
       .where("user_id", userid)
       .then((results) => {
         res.json(results);
@@ -22,7 +22,7 @@ module.exports = (knex) => {
     const resource_id = req.params.resourceid;
     knex
       .select("*")
-      .from("rating")
+      .from("ratings")
       .where("resource_id", resource_id )
       .then((results) => {
         res.json(results);

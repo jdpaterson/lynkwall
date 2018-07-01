@@ -128,20 +128,27 @@ module.exports = (knex) => {
       .where("resource_id", resource_id )
       .then((results) => {
         const catId = results[0].category_id;
-        console.log('result is ', catId);
         knex
         .select("category")
         .from("categories")
         .where("category_id", catId )
         .then((results2) => {
-          const category = results2
-          console.log(results2);
-          console.log('-----');
-          res.render('tagCategory',category);
-      } )
-
-       // res.render("index", {resources: results})
-    });
+          const category = results2;
+          knex
+            .select("url")
+            .from("resources")
+            .where("resource_id", resource_id )
+            .then((results3) => {            
+              const url = results3[0];
+              console.log('url is ', url);
+              res.render('tagCategory',{
+                resource_id: resource_id,
+                category: category,
+                url: url
+              })
+            })
+          })    
+      })
   });
 
   router.post("/new", (req, res) => {
@@ -179,6 +186,14 @@ module.exports = (knex) => {
         });
       });
 
+  router.post("/:resource_id/categories", (req, res) => {
+        knex("categories_resources")
+        .insert({
+          category_id: req.body.category,
+          resource_id: req.params.resource_id
+        })
+        .then(res.redirect('/'));
+  });    
 
   router.post("/:resource_id/comments", (req, res) => {
 
