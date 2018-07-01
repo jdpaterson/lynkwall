@@ -9,60 +9,65 @@
 
           <% include partials/_footerScripts %>
 
+<!-- comments -->
+<div class="comment-section">
+    <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
+        <% for (let res of resources){ %>
 
-
-            <!-- comments -->
-            <div class="grid-x grid-margin-x grid-padding-x grid-padding-y">
-              <% for (let res of resources){ %>
-
-                <div class="card cell small-3" style="width: 300px;">
-                  <div class="card-divider">
-                    This is a header
-                  </div>
-                  <img class="thumbnail" alt="Resource image" src="http://via.placeholder.com/150x150" />
-                  <div class="card-section">
-                    <h4>
-                      <%= res.title %>
-                    </h4>
-                    <a data-res_id="<%=res.resource_id%>" class="like-button float-right">
-                      <i class="far fa-thumbs-up"></i>
-                    </a>
-                    <p>
-                      <%= res.description %>
-                    </p>
-                    <a class="button expanded" target="_blank" href="<%=res.URL %>">Read More</a>
-                    <a href="/resources/<%= res.resource_id %>/comments" hidden>View Comments</a>
-                    <span>
-                      <i class="far fa-star"></i>
-                    </span>
-                  </div>
-                </div>
-                <% } %>
+          <div class="card cell big-3"  style="width: 300px;">
+            <div class="card-divider">
+              This is a header
             </div>
-            <div class="comment-section-container">
-              <h3>Comments (<%=comments.length%>)</h3>
-                <% for (let comment of comments){ %>
-                  <div class="comment-section-author">
-                    <img src="https://placehold.it/50x50" alt="">
-                    <div class="comment-section-name">
-                      <h5>
-                        <a href="">
-                          <%=comment.user_id%>
-                        </a>
-                      </h5>
-                      <p>
-                        <%=comment.created_on%>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="comment-section-text">
-                    <p>
-                      <%=comment.comment_text%>
-                    </p>
-                  </div>
-              </div>
-            <% } %>
-              <!--/comments-->
-  </body>
+            <img class="thumbnail" alt="Resource image" src="http://via.placeholder.com/150x150" />
+            <div class="card-section">
+              <h4><%= res.title %></h4>
+              <a data-res_id="<%=res.resource_id%>" class="like-button float-right">
+                <i class="far fa-thumbs-up"></i>
+              </a>
+              <p><%= res.description %></p>
+              <a class="button expanded" target="_blank" href="<%=res.URL %>" >Read More</a>
+              <a href="/resources/<%= res.resource_id %>/comments"hidden>View Comments</a>
+              <span><i class="far fa-star"></i></span>
+            </div>
+          </div>
+        <% } %>
+        </div>
+  <h3>Comments (<%= Object.keys(userObj).length %>)</h3>
+  <div class="grid-x grid-margin-x grid-padding-x grid-padding-y comment-section" > 
+  <% for (let index in userObj ){ %>
+  <div class="author">
+    <img src="https://placehold.it/50x50" alt="">
+    <div class="name">
+      <h5><a href=""><%= userObj[index].userName%></a></h5>
+      <!-- <p><%=userObj[index].commentText%></p> -->
+    </div>
+  </div>
+  <div class="text">
+    <p><%=userObj[index].commentText%>
+    </p>
+  </div>
+</div>
+<% } %>
 
-</html>
+<!-- comment form -->
+<form class="comment-section" action="/resources/resourceid/comment" method="POST">
+    <div class="box">
+      <div class="row">
+        <div class="small-12 column">
+          <h4>Leave a Comment</h4>
+          <label>Name
+            <input type="text">
+          </label>
+          <label>Email
+            <input type="text">
+          </label>
+          <label>Comment
+            <textarea rows="10" type="text"></textarea>
+          </label>
+          <button class="button expanded">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!--/comment box-->
+<!--/comments-->
