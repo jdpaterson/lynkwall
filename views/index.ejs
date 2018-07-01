@@ -27,7 +27,7 @@
             </form>
               <p><%= res.description %></p>
               <a class="button expanded" target="_blank" href="<%=res.URL %>" >Read More</a>
-              <a href="/resources/<%=res.resource_id%>/comments" class="float-right">View Comments</a>
+              <a href="/resources/<%=res.resource_id%>/comments">View Comments</a>
               <form action="/resources/resourceid/rating" method="POST">
                 <button> <a data-res_id="<%=res.resource_id%>" class="rating-button float-left">
                   <br>
