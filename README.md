@@ -1,14 +1,19 @@
-# Node Skeleton
+# Lynkwall
+Lynkwall is a a full stack web application built using Node and Express that allows users organize resources they find on the internet. Users are able to add their own resources or like other users resources. They can also search for resources that have already been added to the system. 
 
-## Project Setup
+These functionalities are powered by a powerful set of queries that utilize a SQL database (PostGresSQL).
 
+
+
+## Getting Started
+
+
+These instructions will get you a copy of the project up and running on your local machine. See deployment for notes on how to deploy the project on a live system.
+
+```
 1. Create your own empty repo on GitHub
 2. Clone this repository (do not fork)
-  - Suggestion: When cloning, specify a different folder name that is relevant to your project
-3. Remove the git remote: `git remote rm origin`
-4. Add a remote for your origin: `git remote add origin <your github repo URL>`
-5. Push to the new origin: `git push -u origin master`
-6. Verify that the skeleton code now shows up in your repo on GitHub
+```
 
 ## Getting Started
 
@@ -24,7 +29,7 @@
 8. Visit `http://localhost:8080/`
 
 ## Dependencies
-
+- 
 - Node 5.10.x or above
 - NPM 3.8.x or above
 
