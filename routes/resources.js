@@ -138,16 +138,17 @@ module.exports = (knex) => {
             .select("url")
             .from("resources")
             .where("resource_id", resource_id )
-            .then((results3) => {
-              const url = results3;
-              res.render('tagCategory',category,url);
+            .then((results3) => {            
+              const url = results3[0];
+              console.log('url is ', url);
+              res.render('tagCategory',{
+                resource_id: resource_id,
+                category: category,
+                url: url
+              })
             })
-           
-           
-      } )
-         
-       // res.render("index", {resources: results})
-    });
+          })    
+      })
   });
 
   router.post("/new", (req, res) => {
@@ -185,6 +186,14 @@ module.exports = (knex) => {
         });
       });
 
+  router.post("/:resource_id/categories", (req, res) => {
+        knex("categories_resources")
+        .insert({
+          category_id: req.body.category,
+          resource_id: req.params.resource_id
+        })
+        .then(res.redirect('/'));
+  });    
 
   router.post("/:resource_id/comments", (req, res) => {
 

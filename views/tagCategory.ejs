@@ -4,20 +4,21 @@
 <body>
   <% include partials/_top-bar %>
   <% const loggedInUserId = 1 %>
-
+  <% console.log(locals); %>
   <div class="grid-container grid-container-padded">
-    <form method="POST" action="/resources/new">
+    <form method="POST" action="/resources/<%=resource_id%>/categories">
       <div class="grid-container grid-container-padded">
         <div class="grid-y grid-padding-y">
           <div class="medium-6 cell">
             <label>URL
-              <input type="url" name="url" placeholder="<%=url %>"   readonly/>
+              <input type="url" name="url" value="<%= url['url'] %>" placeholder="<%= url['url'] %>"   readonly/>
+              <input type="text" name="resource_id" value="" placeholder="<%=resource_id%>" hidden  readonly/>
             </label>
             <label>Select category</label>
             <fieldset>
-              <input id="radio1" name="category" type="radio" value="Academic"><label for="radio1">Academic</label>
-              <input id="radio2" name="category" type="radio" value="Tutorial"><label for="radio2">Tutorial</label>
-              <input id="radio3" name="category" type="radio" value="Blog"><label for="radio3">Blog</label>
+              <input id="radio1" name="category" type="radio" value="1"><label for="radio1">Academic</label>
+              <input id="radio2" name="category" type="radio" value="2"><label for="radio2">Tutorial</label>
+              <input id="radio3" name="category" type="radio" value="3"><label for="radio3">Blog</label>
             </fieldset>
               <input type="hidden" name="creator_id" value="<%=loggedInUserId%>" />
         </div>
