@@ -136,16 +136,35 @@ module.exports = (knex) => {
 
   router.post("/new", (req, res) => {
     knex("resources")
+      .returning("resource_id")
       .insert({
         url: req.body.url,
         title: req.body.title,
         description: req.body.description,
         creator_id: req.body.creator_id
       })
-      .then((response) => {
-        res.redirect("/");
-      });
+      .then((resource_id) => {
+         
+        knex
+        .select("category_id")
+        .from("categories")
+        .where("category", req.body.category )
+        .then((dbResponse) => {
+          knex("categories_resources")
+          .returning("unique_id")
+          .insert({
+            category_id: dbResponse[0].category_id,
+            resource_id: resource_id[0]
+         
+          })
+          .then( () => {
+            res.redirect("/");
+          } )
 
+        })
+         
+      });
+ 
   });
 
   router.post("/:resourceid/comments", (req, res) => {
