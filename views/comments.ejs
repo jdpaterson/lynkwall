@@ -12,11 +12,11 @@
 
 
 <!-- comments -->
-<div class="comment-section-container">
+<div class="comment-section">
     <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
         <% for (let res of resources){ %>
 
-          <div class="card cell big-3" style="width: 300px;">
+          <div class="card cell big-3"  style="width: 300px;">
             <div class="card-divider">
               This is a header
             </div>
@@ -35,16 +35,16 @@
         <% } %>
         </div>
   <h3>Comments (<%= Object.keys(userObj).length %>)</h3>
-  <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" > 
+  <div class="grid-x grid-margin-x grid-padding-x grid-padding-y comment-section" > 
   <% for (let index in userObj ){ %>
-  <div class="comment-section-author">
+  <div class="author">
     <img src="https://placehold.it/50x50" alt="">
-    <div class="comment-section-name">
+    <div class="name">
       <h5><a href=""><%= userObj[index].userName%></a></h5>
       <!-- <p><%=userObj[index].commentText%></p> -->
     </div>
   </div>
-  <div class="comment-section-text">
+  <div class="text">
     <p><%=userObj[index].commentText%>
     </p>
   </div>
@@ -52,8 +52,8 @@
 <% } %>
 
 <!-- comment form -->
-<form class="comment-section-form" action="/resources/resourceid/comment" method="POST">
-    <div class="comment-section-box">
+<form class="comment-section" action="/resources/resourceid/comment" method="POST">
+    <div class="box">
       <div class="row">
         <div class="small-12 column">
           <h4>Leave a Comment</h4>

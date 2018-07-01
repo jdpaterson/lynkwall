@@ -5,51 +5,31 @@ $comment-form-bg: $light-gray;
 $comment-section-bg: $white;
 $comment-section-padding: $global-padding;
 
-.comment-section-container {
+.comment-section {
   background-color: $comment-section-bg;
   padding: $global-padding;
-}
 
-.comment-section-author {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-
-  .comment-section-name {
-    margin-left: 1rem;
-
-    p {
-      margin-bottom: 0;
+  author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  
+    name {
+      margin-left: 1rem;
+  
+      p {
+        margin-bottom: 0;
+      }
     }
   }
-}
-
-.comment-section-box {
-  background-color: $comment-form-bg;
-  padding: $global-padding;
-}
-
-.comment-section-container {
-  background-color: #eee;
-}
-
-.comment-section-author {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.comment-section-author .comment-section-name {
-  margin-left: 1rem;
-}
-
-.comment-section-author .comment-section-name p {
-  margin-bottom: 0;
-}
-
-.comment-section-box {
-  background-color: #bde;
-  padding: 1.5em;
+  box {
+    background-color: $comment-form-bg;
+    padding: $global-padding;
+  }
+  .card-divider {
+    justify-content: space-around;
+    margin:1em 10em 1em 10em;
+  }
 }
 
 .thumbnail {
@@ -57,7 +37,4 @@ $comment-section-padding: $global-padding;
   height: 50%;
   margin:auto;
 }
-.card-divider {
-  justify-content: space-around;
-  margin: 0 10em;
-}
+
