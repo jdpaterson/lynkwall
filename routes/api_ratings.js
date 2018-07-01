@@ -23,7 +23,7 @@ module.exports = (knex) => {
 
       knex
         .select("*")
-        .from("rating")
+        .from("ratings")
         .whereIn("resource_id", resIds )
         .andWhere("user_id", 1)
         .then((likes) => {
