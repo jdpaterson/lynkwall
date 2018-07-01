@@ -13,7 +13,7 @@
           <% }else{ %>
           <% for (let res of resources){ %>
 
-          <div class="resource-card card cell small-3" style="width: 300px;" data-resource_id="<%=res.resource_id%>">
+          <div class="resource-card card cell small-12 large-3" style="width: 300px;" data-resource_id="<%=res.resource_id%>">
             <div class="card-divider">
              <h5>This is a header</h5>
             </div>
@@ -25,7 +25,7 @@
               </a>
               <p><%= res.description %></p>
               <a class="button expanded" target="_blank" href="<%=res.URL %>" >Read More</a>
-              <a href="/resources/<%=res.resource_id%>/comments" class="float-right">View Comments</a>
+              <a href="/resources/<%=res.resource_id%>/comments" >View Comments</a>
 
                 <div class="rating">
                   <label>
@@ -44,36 +44,11 @@
                     <input type="radio" value="1" title="1 star"> 1
                   </label>
                 </div>
-
-              <!--form action="/resources/resourceid/rating" method="POST">
-                <button> <a data-res_id="<%=res.resource_id%>" class="rating-button float-left">
-                  <br>
-                  <div class="rating">
-                    <label>
-                      <input type="radio" name="rating" value="5" title="5 stars"> 5
-                    </label>
-                    <label>
-                      <input type="radio" name="rating" value="4" title="4 stars"> 4
-                    </label>
-                    <label>
-                      <input type="radio" name="rating" value="3" title="3 stars"> 3
-                    </label>
-                    <label>
-                      <input type="radio" name="rating" value="2" title="2 stars"> 2
-                    </label>
-                    <label>
-                      <input type="radio" name="rating" value="1" title="1 star"> 1
-                    </label>
-                  </div>
-                  </a>
-                </button>
-              </form-->
-
+              </div>
             </div>
-          </div>
-        <% } %>
-        <% } %>
-        </div>
+          <% } %>
+          <% } %>
+          </div>                
       </div>
      <% include partials/_footerScripts %>
   </body>

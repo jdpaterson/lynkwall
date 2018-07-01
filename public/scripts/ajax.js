@@ -59,18 +59,17 @@ $(document).ready(function() {
       $(ev.delegateTarget).children('i').toggleClass('fas');
   });
 
-  $('.rating input').change(function () {
-    var $radio = $(this);
-    $('.rating .selected').removeClass('selected');
-    $radio.closest('label').addClass('selected');
-  });
 
   $('.rating input').on('click', function(){
     const parentCard = $(this).parents('div .resource-card');
     const resId = parentCard[0].dataset.resource_id;
     const rating = $(this).val();
-    console.log(parentCard);
+    $(this).parent().siblings().removeClass('selected');
+    $(this).parent().addClass('selected');
+
     $.post(`/resources/${resId}/rating`, {resourceId: resId, rate: rating});
+
+
   });
 
 })
