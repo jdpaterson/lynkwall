@@ -1,17 +1,59 @@
-# Node Skeleton
+# Lynkwall
+Lynkwall is a a full stack web application built using Node and Express that allows users organize resources they find on the internet. Users are able to add their own resources or like other users resources. They can also search for resources that have already been added to the system. 
+
+These functionalities are powered by a robust set of SQL queries.
+
+## Screenshots
+
+![PLACEHOLDER until I get some better footage](https://i.imgur.com/0ArNomm.gif)
+
+
+
+![]()
+
+
+
+![]()
+
+
+
+
+
 
 ## Project Setup
 
+
+These instructions will get you a copy of the project up and running on your local machine. See deployment for notes on how to deploy the project on a live system.
+
+```
 1. Create your own empty repo on GitHub
 2. Clone this repository (do not fork)
-  - Suggestion: When cloning, specify a different folder name that is relevant to your project
-3. Remove the git remote: `git remote rm origin`
-4. Add a remote for your origin: `git remote add origin <your github repo URL>`
-5. Push to the new origin: `git push -u origin master`
-6. Verify that the skeleton code now shows up in your repo on GitHub
+```
+## Migration order
+Must perform migration 1,2,3,4 in this exact order
+
+#### **Do not use 20180628050751_rating.js**
+
+#### Order:
+
+
+`1 - create_users_table.js`
+
+`2 - create_resources.js`
+
+`3 - categories.js`
+
+`4 - categories_resources.js`
+
+`5 - likes.js`
+
+`6 - comments.js`
+
+`7 - rating.js`
+
 
 ## Getting Started
-
+```
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
 2. Update the .env file with your correct local information
 3. Install dependencies: `npm i`
@@ -22,19 +64,20 @@
   - Check the seeds file to see what gets seeded in the DB
 7. Run the server: `npm run local`
 8. Visit `http://localhost:8080/`
-
+```
 ## Dependencies
-
 - Node 5.10.x or above
 - NPM 3.8.x or above
+- body-parser
+- dotenv
+- express
+- foundation-sites 6.0 or above
+- knex
+- knex-logger
+- node-sass-middleware
+- moment
+- morgan
+- pg
+- request
+- sass
 
-## Migration order
-- Must perform migration 1,2,3,4 in this exact order
-- Don't use 20180628050751_rating.js
-1 - create_users_table.js
-2 - create_resources.js
-3 - categories.js
-4 - categories_resources.js
-5 - likes.js
-6 - comments.js
-7 - rating.js
