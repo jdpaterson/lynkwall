@@ -1,11 +1,11 @@
 # Lynkwall
 Lynkwall is a a full stack web application built using Node and Express that allows users organize resources they find on the internet. Users are able to add their own resources or like other users resources. They can also search for resources that have already been added to the system. 
 
-These functionalities are powered by a powerful set of queries that utilize a SQL database (PostGresSQL).
+These functionalities are powered by a robust set of SQL queries.
 
 ## Screenshots
 
-![]()
+![PLACEHOLDER until I get some better footage](https://i.imgur.com/0ArNomm.gif)
 
 
 
@@ -29,6 +29,28 @@ These instructions will get you a copy of the project up and running on your loc
 1. Create your own empty repo on GitHub
 2. Clone this repository (do not fork)
 ```
+## Migration order
+Must perform migration 1,2,3,4 in this exact order
+
+#### **Do not use 20180628050751_rating.js**
+
+#### Order:
+
+
+`1 - create_users_table.js`
+
+`2 - create_resources.js`
+
+`3 - categories.js`
+
+`4 - categories_resources.js`
+
+`5 - likes.js`
+
+`6 - comments.js`
+
+`7 - rating.js`
+
 
 ## Getting Started
 ```
@@ -59,13 +81,3 @@ These instructions will get you a copy of the project up and running on your loc
 - request
 - sass
 
-## Migration order
-- Must perform migration 1,2,3,4 in this exact order
-- Don't use 20180628050751_rating.js
-1 - create_users_table.js
-2 - create_resources.js
-3 - categories.js
-4 - categories_resources.js
-5 - likes.js
-6 - comments.js
-7 - rating.js
