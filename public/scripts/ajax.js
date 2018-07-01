@@ -6,14 +6,15 @@ $(document).ready(function() {
     resIds[i] = resCards[i].dataset.resource_id;
   }
 
+  /* TODO GET LIKE COUNT
   $.get('/api/v1/likes/resources', resIds, function(likes){
     for (let like of likes){
       const resCard = $(`[data-resource_id="${rating.resource_id}"]`);
-      
+
 
 
     }
-  })
+  })*/
 
   $.get('/api/v1/likes/resources/user', resIds, function(likes){
     for (let like of likes){
@@ -26,7 +27,7 @@ $(document).ready(function() {
   $.get('/api/v1/ratings/resources/user', resIds, function(ratings){
     for (let rating of ratings){
       const resCard = $(`[data-resource_id="${rating.resource_id}"]`);
-      const rate = rating.rate;
+      const rate = rating.rating;
       const stars = resCard.find('.rating label').toArray().reverse();
       $(stars[rate - 1]).addClass('selected');
     }
@@ -76,7 +77,7 @@ $(document).ready(function() {
     $(this).parent().siblings().removeClass('selected');
     $(this).parent().addClass('selected');
 
-    $.post(`/resources/${resId}/rating`, {resourceId: resId, rate: rating});
+    $.post(`/resources/${resId}/rating`, {resourceId: resId, rating: rating});
 
 
   });
