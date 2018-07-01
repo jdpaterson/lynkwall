@@ -4,7 +4,7 @@
     <div class="grid-container grid-container-padded">
       <div class="grid-y grid-padding-y">
         <div class="medium-6 cell">
-          <label>Subject
+          <label>Title
             <input type="text" name="title" placeholder="Title" />
           </label>
           <label>Description
@@ -13,6 +13,14 @@
           <label>URL
             <input type="text" name="URL" placeholder="URL" />
           </label>
+          <label>Image URL
+              <input type="text" name="image_url" placeholder="image_url" />
+            </label>
+          <label>Select category</label>
+              <input id="checkbox1" type="checkbox"><label for="checkbox1">Academic</label>
+              <input id="checkbox2" type="checkbox"><label for="checkbox2">Tutorial</label>
+              <input id="checkbox3" type="checkbox"><label for="checkbox3">Blog</label>
+           
           <input type="hidden" name="creator_id" value="<%=loggedInUserId%>" />
         </div>
       </div>
