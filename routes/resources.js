@@ -139,14 +139,14 @@ module.exports = (knex) => {
           console.log('-----');
           res.render('tagCategory',category);
       } )
-         
+
        // res.render("index", {resources: results})
     });
   });
 
   router.post("/new", (req, res) => {
     request(`http://api.linkpreview.net/?key=${urlPreviewKey}&q=${req.body.url}`, function (error, response, body) {
-      const jsonResp = JSON.parse(body);      
+      const jsonResp = JSON.parse(body);
       //res.redirect("/");
       knex("resources")
         .returning("resource_id")
@@ -206,21 +206,21 @@ module.exports = (knex) => {
       .select("*")
       .from("likes")
       .where({
-        user_id: userId,
+        user_id: user_id,
         resource_id: resId
       }).then((results)=>{
         if (results.length === 0){
           knex("likes")
             .insert({
               resource_id: resId,
-              user_id: userId,
+              user_id: user_id,
               created_on: now
             }).then((insert)=>{});
         }else{
           knex("likes")
             .where({
               resource_id: resId,
-              user_id: userId
+              user_id: user_id
             }).del().then((count) => {});
         }
       });
