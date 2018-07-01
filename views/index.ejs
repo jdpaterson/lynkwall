@@ -6,7 +6,7 @@
 
       <% console.log('resources length', resources.length); %>
       <% include partials/_newResource.ejs %>
-      <div class="grid-container" style="margin-top:1em">
+      <div class="grid-container " style="margin-top:1em">
         <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
           <% if (locals.resources === undefined){ %>
             <p>No resources found...</p>
@@ -15,40 +15,52 @@
 
           <div class="resource-card card cell small-12 large-3" style="width: 300px;" data-resource_id="<%=res.resource_id%>">
             <div class="card-divider">
-             <h5>This is a header</h5>
+             <!-- <h5>This is a header</h5> -->
+             <h4><%= res.title %></h4>
             </div>
-            <img class="thumbnail" style="height: 150px;width: 150px;" alt="Resource image" src="https://upload.wikimedia.org/wikipedia/commons/e/e9/CH_Buck_and_Sons_Evita_Peron.jpg" />
+            <img class="thumbnail" style="height: 150px;width: 150px;" alt="Resource image" src="<%=res.image_url%>" />
             <div class="card-section">
               <h4><%= res.title %></h4>
-              <a data-res_id="<%=res.resource_id%>" class="like-button float-right">
+              <!-- <a data-res_id="<%=res.resource_id%>" class="like-button float-right">
                 <i class="far fa-thumbs-up"></i>
-              </a>
+              </a> -->
               <p><%= res.description %></p>
-              <a class="button expanded" target="_blank" href="<%=res.URL %>" >Read More</a>
-              <a href="/resources/<%=res.resource_id%>/comments" >View Comments</a>
+              <a class="button expanded" target="_blank" href="<%=res.URL %>" >Read More ...</a>
+               
 
-                <div class="rating">
-                  <label>
-                    <input type="radio" value="5" title="5 stars"> 5
-                  </label>
-                  <label>
-                    <input type="radio" value="4" title="4 stars"> 4
-                  </label>
-                  <label>
-                    <input type="radio" value="3" title="3 stars"> 3
-                  </label>
-                  <label>
-                    <input type="radio" value="2" title="2 stars"> 2
-                  </label>
-                  <label>
-                    <input type="radio" value="1" title="1 star"> 1
-                  </label>
-                </div>
+              <div class="our-icons" style="display: flex; justify-content: space-between;">
+                  <div>
+                      <i class="far fa-thumbs-up"></i>
+                      <span>
+                          <i class="fas fa-tags"></i>
+                      </span>
+                  </div> 
+ 
+                  <div class="rating">
+                      <label>
+                        <input type="radio" value="5" title="5 stars"> 5
+                      </label>
+                      <label>
+                        <input type="radio" value="4" title="4 stars"> 4
+                      </label>
+                      <label>
+                        <input type="radio" value="3" title="3 stars"> 3
+                      </label>
+                      <label>
+                        <input type="radio" value="2" title="2 stars"> 2
+                      </label>
+                      <label>
+                        <input type="radio" value="1" title="1 star"> 1
+                      </label>
+                    </div> 
+              </div>
+              <a href="/resources/<%=res.resource_id%>/comments" >View Comments</a>
+               
               </div>
             </div>
           <% } %>
           <% } %>
-          </div>                
+          </div>
       </div>
      <% include partials/_footerScripts %>
   </body>
