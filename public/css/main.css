@@ -61,4 +61,9 @@
   -webkit-text-fill-color: transparent;
 }
 
+.card-divider {
+  justify-content: space-around;
+  margin: 1em;
+}
+
 /*# sourceMappingURL=main.css.map */
