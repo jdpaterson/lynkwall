@@ -41,7 +41,18 @@
 
 .comment-section-box {
   background-color: #bde;
-  padding: 0.5em;
+  padding: 1.5em;
+}
+
+.thumbnail {
+  width: 30%;
+  height: 50%;
+  margin: auto;
+}
+
+.card-divider {
+  justify-content: space-around;
+  margin: 0 10em;
 }
 
 .rating {
