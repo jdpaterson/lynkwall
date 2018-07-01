@@ -4,7 +4,7 @@ const express = require("express");
 const router  = express.Router();
 const moment = require("moment");
 const utility = require('../utility');
-
+const user_id = 1;
 module.exports = (knex) => {
 
   // router.get("/", (req, res) => {
@@ -136,16 +136,35 @@ module.exports = (knex) => {
 
   router.post("/new", (req, res) => {
     knex("resources")
+      .returning("resource_id")
       .insert({
         url: req.body.url,
         title: req.body.title,
         description: req.body.description,
         creator_id: req.body.creator_id
       })
-      .then((response) => {
-        res.redirect("/");
-      });
+      .then((resource_id) => {
+         
+        knex
+        .select("category_id")
+        .from("categories")
+        .where("category", req.body.category )
+        .then((dbResponse) => {
+          knex("categories_resources")
+          .returning("unique_id")
+          .insert({
+            category_id: dbResponse[0].category_id,
+            resource_id: resource_id[0]
+         
+          })
+          .then( () => {
+            res.redirect("/");
+          } )
 
+        })
+         
+      });
+ 
   });
 
   router.post("/:resourceid/comments", (req, res) => {
@@ -197,6 +216,43 @@ module.exports = (knex) => {
         }
       });
   });
+
+  router.post("/:resourceid/rating", (req, res) => {
+    const resource_id = req.params.resourceid;
+    const newRating = req.body.rate;
+    const user_id = 1;
+    const now = moment().format("YYYY MM DD");
+
+    knex
+      .select("*")
+      .from("rating")
+      .where({
+        resource_id: resource_id,
+        user_id: user_id
+      }).then((ratings) => {
+        if (ratings.length !== 0){
+          ratings[0].rating_id;
+          knex('rating')
+            .where({rating_id: ratings[0].rating_id})
+            .update({
+              rate: newRating,
+              updated_on: now
+            }).then((res)=>{
+              return res;
+            });
+        }else{
+          knex('rating')
+            .insert({
+              resource_id: resource_id,
+              user_id: user_id,
+              rate: newRating,
+              created_on: now
+            }).then((res)=>{
+              return res;
+            });
+        }
+      })
+ });
 
   return router;
 }
