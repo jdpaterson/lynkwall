@@ -3,9 +3,24 @@ Lynkwall is a a full stack web application built using Node and Express that all
 
 These functionalities are powered by a powerful set of queries that utilize a SQL database (PostGresSQL).
 
+## Screenshots
+
+![]()
 
 
-## Getting Started
+
+![]()
+
+
+
+![]()
+
+
+
+
+
+
+## Project Setup
 
 
 These instructions will get you a copy of the project up and running on your local machine. See deployment for notes on how to deploy the project on a live system.
@@ -16,7 +31,7 @@ These instructions will get you a copy of the project up and running on your loc
 ```
 
 ## Getting Started
-
+```
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
 2. Update the .env file with your correct local information
 3. Install dependencies: `npm i`
@@ -27,11 +42,22 @@ These instructions will get you a copy of the project up and running on your loc
   - Check the seeds file to see what gets seeded in the DB
 7. Run the server: `npm run local`
 8. Visit `http://localhost:8080/`
-
+```
 ## Dependencies
-- 
 - Node 5.10.x or above
 - NPM 3.8.x or above
+- body-parser
+- dotenv
+- express
+- foundation-sites 6.0 or above
+- knex
+- knex-logger
+- node-sass-middleware
+- moment
+- morgan
+- pg
+- request
+- sass
 
 ## Migration order
 - Must perform migration 1,2,3,4 in this exact order
