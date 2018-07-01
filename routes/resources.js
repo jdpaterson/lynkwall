@@ -122,8 +122,7 @@ module.exports = (knex) => {
 
   router.post("/new", (req, res) => {
     request(`http://api.linkpreview.net/?key=${urlPreviewKey}&q=${req.body.url}`, function (error, response, body) {
-      const jsonResp = JSON.parse(body);
-      console.log('Title: ', jsonResp.title);
+      const jsonResp = JSON.parse(body);      
       //res.redirect("/");
       knex("resources")
         .returning("resource_id")
@@ -157,21 +156,18 @@ module.exports = (knex) => {
       });
 
 
-  router.post("/:resourceid/comments", (req, res) => {
+  router.post("/:resource_id/comments", (req, res) => {
 
-    const {conment_text, created_on, updated_on, resource_id, user_id} = req.body;
-    knex("comment")
+    const now = moment().format('YYYY MM DD');
+    knex("comments")
     .insert({
-      comment_text,
-      created_on,
-      updated_on,
-      resource_id,
-      user_id
+      comment_text: req.body.comment_text,
+      created_on: now,
+      updated_on: now,
+      resource_id: req.params.resource_id,
+      user_id: user_id
     })
-    .then();
-
-
-    return res.redirect("/");
+    .then(res.redirect('/'));
 
   });
 
@@ -179,7 +175,6 @@ module.exports = (knex) => {
 
     const resId = req.params.resourceid;
     //Needs to be changed once we implement Users/Cookies
-    const userId = 1;
     const now = moment().format("YYYY MM DD");
 
     //If a like exists then delete it , else add a new one.

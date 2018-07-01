@@ -12,44 +12,30 @@ module.exports = (knex) => {
       .select("*")
       .from("comments")
       .where("user_id", userid)
-      .then((results) => {  
+      .then((results) => {
         res.json(results);
         //res.render("index", {resources: results})
 
       })
     })
-      
-  router.get("/:resourceid", (req, res) => {
-    const resource_id = req.params.resourceid;
+
+  router.get("/:resourceId", (req, res) => {
+    const resourceId = req.params.resourceId;
     knex
       .select("*")
       .from("resources")
-      .where("resource_id", resource_id)
+      .where("resource_id", resourceId)
       .then((results) => {
         knex
         .select("*")
         .from("comments")
-        .where("resource_id", resource_id)
+        .where("resource_id", resourceId)
         .then((results2) => {
           return res.json({results, results2});
           //res.render("index", {resources: results})
       });
     });
   });
-
-  router.post("/:resourceid/new", (req, res) => {
-    const resource_id = req.params.resourceid;
-    knex('comments')
-      .insert({
-        comment_text: req.body.comment_text,
-        created_on: req.body.created_on,
-        updated_on: null,
-        resource_id: resource_id,
-        user_id: 1 //hardcoded for now
-      }).then((result)=>{
-      res.redirect('/');
-    });
- });
 
   return router;
 }
