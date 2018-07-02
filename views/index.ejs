@@ -2,73 +2,77 @@
 <html lang="en">
 <% include partials/_head %>
   <body>
-      <% include partials/_top-bar %>
-
-      <% console.log('resources length', resources.length); %>
-      <% include partials/_newResource.ejs %>
-      <div class="grid-container " style="margin-top:1em">
-        <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" data-equalizer data-equalize-on="medium">
-          <% if (locals.resources === undefined){ %>
-            <p>No resources found...</p>
-          <% }else{ %>
-          <% for (let res of resources){ %>
-
-          <div class="resource-card card cell small-12 large-3" data-resource_id="<%=res.resource_id%>">
-            <div class="card-divider">
-             <!-- <h5>This is a header</h5> -->
-             <h7><%= res.title %></h7>
+    <% include partials/_top-bar %>
+    <% console.log('resources length', resources.length); %>
+    <% include partials/_newResource.ejs %>
+    <div class="grid-container " style="margin-top:1em">
+      <div class="grid-x grid-margin-x " data-equalizer data-equalize-on="medium">
+        <% if (locals.resources === undefined){ %>
+          <p>No resources found...</p>
+        <% }else{ %>
+        <% for (let res of resources){ %>
+        <div class="resource-card card cell small-12 large-3" data-resource_id="<%=res.resource_id%>">
+          <div class="grid-y" style="height:32em;" >
+            <div class="cell 2 card-divider" data-equalizer-watch>
+             <h5 class="subheader">
+               <% if (res.title.length > 20){ %>
+                 <%= res.title.substring(0,20) %>...
+                 <% }else{ %>
+                 <%= res.title %>
+                 <% } %>
+               </h5>
             </div>
-            <img alt="Resource image" src="<%=res.image_url%>" />
-            <div class="card-section">
-              <!-- <h4><%= res.title %></h4> -->
-              <!-- <a data-res_id="<%=res.resource_id%>" class="like-button float-right">
-                <i class="far fa-thumbs-up"></i>
-              </a> -->
+            <div class="cell auto" style="display:flex;align-items:center;" >
+              <img alt="Resource image" class="float-center" style="max-height:125px;max-width:150px;" src="<%=res.image_url%>" />
+            </div>
+            <div class="card-section text-center cell auto" style="margin:0px;">
               <p><% if (res.description.length > 80){ %>
                 <%= res.description.substring(0,77) %>...
                 <% }else{ %>
                 <%= res.description %>
                 <% } %>
               </p>
-              <a class="button expanded" target="_blank" href="<%=res.URL %>" >Read More ...</a>
-
-
-              <div class="our-icons" style="display: flex; justify-content: space-between;">
-                  <div>
-                      <a data-res_id="<%=res.resource_id%>" class="like-button">
-                          <i class="far fa-thumbs-up"></i>
-                      </a>
-                      <a data-res_id="<%=res.resource_id%>" class="tag-button"  data-open="tagCategoryForm" href="/resources/<%=res.resource_id%>/categories">
-                          <i class="fas fa-tags"></i>
-                      </span>
-                  </div>
-
-                  <div class="rating">
-                      <label>
-                        <input type="radio" value="5" title="5 stars"> 5
-                      </label>
-                      <label>
-                        <input type="radio" value="4" title="4 stars"> 4
-                      </label>
-                      <label>
-                        <input type="radio" value="3" title="3 stars"> 3
-                      </label>
-                      <label>
-                        <input type="radio" value="2" title="2 stars"> 2
-                      </label>
-                      <label>
-                        <input type="radio" value="1" title="1 star"> 1
-                      </label>
-                    </div>
-              </div>
-              <a href="/resources/<%=res.resource_id%>/comments" >View Comments</a>
-
-              </div>
             </div>
-          <% } %>
-          <% } %>
+            <div class="cell ">
+              <a class="text-center button expanded" target="_blank" href="<%=res.URL %>" >Read More ...</a>
+              <div class="our-icons" style="margin-left: 2em;display: flex; justify-content: space-between;">
+                <div class="rating">
+                  <label>
+                    <input type="radio" value="5" title="5 stars"> 5
+                  </label>
+                  <label>
+                    <input type="radio" value="4" title="4 stars"> 4
+                  </label>
+                  <label>
+                    <input type="radio" value="3" title="3 stars"> 3
+                  </label>
+                  <label>
+                    <input type="radio" value="2" title="2 stars"> 2
+                  </label>
+                  <label>
+                    <input type="radio" value="1" title="1 star"> 1
+                  </label>
+                </div>
+                <div>
+                  <a data-res_id="<%=res.resource_id%>" class="like-button">
+                    <i class="far fa-thumbs-up"></i>
+                  </a>
+                  <a data-res_id="<%=res.resource_id%>" class="tag-button"  data-open="tagCategoryForm" href="#">
+                    <i class="fas fa-tags"></i>
+                  </span>
+                </div>
+              </div>
+              <p class="text-center">
+                <a href="/resources/<%=res.resource_id%>/comments" style="" >View Comments</a>
+              </p>
+
+            </div>
           </div>
-      </div>
-     <% include partials/_footerScripts %>
+        </div>
+        <% } %>
+        <% } %>
+        </div>
+    </div>
+   <% include partials/_footerScripts %>
   </body>
 </html>
