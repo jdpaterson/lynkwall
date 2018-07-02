@@ -89,7 +89,7 @@ $(document).ready(function() {
     const dialog = $(this).parents('.resource-card').find('.hiddenDiv').dialog({
       autoOpen: false,
       height: 300,
-      width: 300,
+      width: 400,
       modal: true,
     });
     dialog.dialog( "open" );
