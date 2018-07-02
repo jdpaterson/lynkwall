@@ -5,7 +5,7 @@ These functionalities are powered by a robust set of SQL queries.
 
 ## Screenshots
 
-![PLACEHOLDER until I get some better footage](https://i.imgur.com/0ArNomm.gif)
+![PLACEHOLDER until I get some better footage](https://i.imgur.com/6Ofg1Qh.gif)
 
 
 
