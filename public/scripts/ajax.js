@@ -88,9 +88,9 @@ $(document).ready(function() {
     console.log('sup');
     const dialog = $(this).parents('.resource-card').find('.hiddenDiv').dialog({
       autoOpen: false,
-      height: 600,
-      width: 350,
-      modal: true,      
+      height: 300,
+      width: 300,
+      modal: true,
     });
     dialog.dialog( "open" );
   });
