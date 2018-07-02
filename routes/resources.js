@@ -10,56 +10,6 @@ const urlPreviewKey = '5b390f942f6c14c92f9c98f8a02705400ceddbf88a7d3';
 
 module.exports = (knex) => {
 
-  /*router.get("/", (req, res) => {
-    const countStr = 'select resource_id from resources'
-    knex
-      .select("*")
-      .from("resources")
-      .then((resources) => {
-        knex
-        .select("*")
-        .from("categories")
-        .then((categories) => {
-          knex
-            .select("resource_id")
-            .count("like_id as like_count")
-            .from("likes")
-            .groupBy("resource_id")
-            .whereIn('resource_id', function() {
-              this.select('resource_id').from('resources')
-            })
-            .then( (likecount)=> {
-              knex
-               .select("resource_id")
-               .count("comment_id as comment_count")
-               .from("comments")
-               .groupBy("resource_id")
-               .whereIn('resource_id', function() {
-                 this.select('resource_id').from('resources')
-               })
-               .then((commentcount) => {
-                knex
-                .select("resource_id")
-                .avg("rate as rating_avg")
-                .from("ratings")
-                .groupBy("resource_id")
-                .whereIn('resource_id', function() {
-                  this.select('resource_id').from('resources')
-                })
-                .then((ratingaverage) => {
-
-                  return res.json({resources, categories, likecount, commentcount, ratingaverage});
-                })
-
-              })
-
-            })
-
-          //res.render("index", {resources: results, categories: results2, countlikes: result3})
-      });
-    });
-  });*/
-
   router.get("/search", (req, res) => {
     const query = req.query.queryStr;
     knex
@@ -69,15 +19,10 @@ module.exports = (knex) => {
       .orWhere("description", "like", `%${query}%`)
       .orWhere("url", "like", `%${query}%`)
       .then((resources) => {
-        knex
-          .select("*")
-          .from("categories")
-          .then((categories) => {
-            res.render("index", {
-              resources: resources,
-              categories: categories
-            })
-          })
+        res.render("index", {
+          resources: resources,
+          categories: categories
+        })
       })
   })
 
@@ -154,39 +99,23 @@ module.exports = (knex) => {
   });
 
   router.post("/new", (req, res) => {
-    request(`http://api.linkpreview.net/?key=${urlPreviewKey}&q=${req.body.url}`, function (error, response, body) {
-      const jsonResp = JSON.parse(body);
-      //res.redirect("/");
-      knex("resources")
-        .returning("resource_id")
-        .insert({
-          url: jsonResp.url,
-          title: jsonResp.title,
-          description: jsonResp.description,
-          image_url: jsonResp.image,
-          creator_id: user_id
-        })
-        .then(() => {
-          res.redirect("/");
-        })
-        /*.then((resource_id) => {
-          knex
-          .select("category_id")
-          .from("categories")
-          .where("category", req.body.category )
-          .then((dbResponse) => {
-            knex("categories_resources")
-            .returning("unique_id")
-            .insert({
-              category_id: dbResponse[0].category_id,
-              resource_id: resource_id[0]
-            })
-            .then(() => {
-              res.redirect("/");
-            })
-          })*/
-        });
+    request(`http://api.linkpreview.net/?key=${urlPreviewKey}&q=${req.body.url}`,
+      function (error, response, body) {
+        const jsonResp = JSON.parse(body);
+        knex("resources")
+          .returning("resource_id")
+          .insert({
+            url: jsonResp.url,
+            title: jsonResp.title,
+            description: jsonResp.description,
+            image_url: jsonResp.image,
+            creator_id: user_id
+          })
+          .then(() => {
+            res.redirect("/");
+          })
       });
+    });
 
   router.post("/:resource_id/categories", (req, res) => {
         knex("categories_resources")
@@ -215,7 +144,6 @@ module.exports = (knex) => {
   router.post("/:resourceid/likes", (req, res) => {
 
     const resId = req.params.resourceid;
-    //Needs to be changed once we implement Users/Cookies
     const now = moment().format("YYYY MM DD");
 
     //If a like exists then delete it , else add a new one.

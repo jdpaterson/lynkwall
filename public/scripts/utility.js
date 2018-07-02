@@ -1,7 +1,4 @@
 function createCommentsObj(users, comments){
-  /*const obj = {
-    comment_id: { userId, commentText }
-  };*/
   const userObj = {};
   const commentsObj = {};
 
@@ -14,7 +11,7 @@ function createCommentsObj(users, comments){
       commentText : comment.comment_text,
       userName : userObj[comment.user_id],
     }
-    console.log(commentsObj);    
+    console.log(commentsObj);
   }
 
   console.log('OBJ:', commentsObj);
