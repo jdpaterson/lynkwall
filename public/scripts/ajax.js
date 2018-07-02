@@ -81,10 +81,18 @@ $(document).ready(function() {
     const rating = $(this).val();
     $(this).parent().siblings().removeClass('selected');
     $(this).parent().addClass('selected');
-
     $.post(`/resources/${resId}/rating`, {resourceId: resId, rating: rating});
+  });
 
-
+  $('.fa-tags').on('click', function(){
+    console.log('sup');
+    const dialog = $(this).parents('.resource-card').find('.hiddenDiv').dialog({
+      autoOpen: false,
+      height: 600,
+      width: 350,
+      modal: true,      
+    });
+    dialog.dialog( "open" );
   });
 
 })

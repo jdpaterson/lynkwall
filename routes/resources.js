@@ -20,7 +20,7 @@ module.exports = (knex) => {
       .orWhere("url", "like", `%${query}%`)
       .then((resources) => {
         res.render("index", {
-          resources: resources,          
+          resources: resources,
         })
       })
   })
@@ -117,12 +117,19 @@ module.exports = (knex) => {
     });
 
   router.post("/:resource_id/categories", (req, res) => {
-        knex("categories_resources")
-        .insert({
-          category_id: req.body.category,
-          resource_id: req.params.resource_id
-        })
-        .then(res.redirect('/'));
+    const data = [];
+    for(let cat of req.body.categories){
+      let catRes = {
+        category_id: cat,
+        resource_id: req.params.resource_id
+      }
+      data.push(catRes);
+    }
+
+    knex("categories_resources")
+    .insert(data)
+    .then(res.redirect('/'));
+
   });
 
   router.post("/:resource_id/comments", (req, res) => {
