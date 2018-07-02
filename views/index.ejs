@@ -10,6 +10,8 @@
           <p>No resources found...</p>
         <% }else{ %>
         <% for (let res of resources){ %>
+          <% include partials/_tagCategory.ejs %>
+
         <div class="resource-card card cell small-12 large-3" data-resource_id="<%=res.resource_id%>">
           <div class="grid-y" style="height:32em;" >
             <div class="cell 2 card-divider" data-equalizer-watch>
@@ -56,7 +58,7 @@
                   <a data-res_id="<%=res.resource_id%>" class="like-button">
                     <i class="far fa-thumbs-up"></i>
                   </a>
-                  <a data-res_id="<%=res.resource_id%>" class="tag-button"  data-open="tagCategoryForm" href="#">
+                  <a class="tag-button" href="#">
                     <i class="fas fa-tags"></i>
                   </span>
                 </div>
@@ -64,7 +66,30 @@
               <p class="text-center">
                 <a href="/resources/<%=res.resource_id%>/comments" style="" >View Comments</a>
               </p>
-
+              <div class="hiddenDiv" style="background-color:white;" hidden>
+                <form method="POST" action="/resources/<%=res.resource_id%>/categories">
+                  <div class="grid-container grid-container-padded">
+                    <div class="grid-y grid-padding-y">
+                      <div class="medium-6 cell">
+                        <h4><%=res.title%></h4>
+                        <label>Select categories</label>
+                        <fieldset >
+                          <input id="chkAca" name="categories" type="checkbox" value="1"><label for="chkAca">Academic</label>
+                          <input id="chkTut" name="categories" type="checkbox" value="2"><label for="chkTut">Tutorial</label>
+                          <input id="chkBlo" name="categories" type="checkbox" value="3"><label for="chkBlo">Blog</label>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="grid-container grid-container-padded">
+                    <div class="grid-x grid-margin-x">
+                      <div class="cell small-12 medium-6 large-2 ">
+                        <button type="submit" class="button">Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
