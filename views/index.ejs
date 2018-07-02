@@ -13,12 +13,12 @@
           <% }else{ %>
           <% for (let res of resources){ %>
 
-          <div class="resource-card card cell small-12 large-3" style="width: 300px;" data-resource_id="<%=res.resource_id%>">
-            <div class="card-divider" data-equalizer-watch>
+          <div class="resource-card card cell small-12 large-3" data-resource_id="<%=res.resource_id%>">
+            <div class="card-divider">
              <!-- <h5>This is a header</h5> -->
              <h7><%= res.title %></h7>
             </div>
-            <img class="thumbnail" style="height: 150px;width: 150px;" alt="Resource image" src="<%=res.image_url%>" />
+            <img alt="Resource image" src="<%=res.image_url%>" />
             <div class="card-section">
               <!-- <h4><%= res.title %></h4> -->
               <!-- <a data-res_id="<%=res.resource_id%>" class="like-button float-right">
@@ -38,7 +38,7 @@
                       <a data-res_id="<%=res.resource_id%>" class="like-button">
                           <i class="far fa-thumbs-up"></i>
                       </a>
-                      <a data-res_id="<%=res.resource_id%>" class="tag-button"  data-open="tagCategoryForm" href="#">
+                      <a data-res_id="<%=res.resource_id%>" class="tag-button"  data-open="tagCategoryForm" href="/resources/<%=res.resource_id%>/categories">
                           <i class="fas fa-tags"></i>
                       </span>
                   </div>
