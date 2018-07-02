@@ -1,13 +1,24 @@
-function createObj(arrInput){
-  var obj = [];
-  for( let i = 0; i < arrInput.length; i++){
-    let id = arrInput[i].id;
-    let value = arrInput[i].name;
-    let newObj = {};
-    newObj[id] = value;
-    obj.push(newObj);
+function createCommentsObj(users, comments){
+  /*const obj = {
+    comment_id: { userId, commentText }
+  };*/
+  const userObj = {};
+  const commentsObj = {};
+
+  for( let i = 0; i < users.length; i++){
+    userObj[users[i].id] = users[i].name
   }
-  return obj;
+
+  for (let comment of comments){
+    commentsObj[comment.comment_id] = {
+      commentText : comment.comment_text,
+      userName : userObj[comment.user_id],
+    }
+    console.log(commentsObj);    
+  }
+
+  console.log('OBJ:', commentsObj);
+  return commentsObj;
  }
 
  function getUrlPreview(url){
@@ -19,6 +30,6 @@ function createObj(arrInput){
  }
 
  module.exports = {
-   createObj: createObj,
+   createCommentsObj: createCommentsObj,
    getUrlPreview: getUrlPreview,
  }

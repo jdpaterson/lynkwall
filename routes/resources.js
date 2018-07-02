@@ -4,12 +4,13 @@ const express = require("express");
 const router  = express.Router();
 const request = require('request');
 const moment = require("moment");
-const utility = require('../utility');
+const utility = require('../public/scripts/utility.js');
 const user_id = 1;
 const urlPreviewKey = '5b390f942f6c14c92f9c98f8a02705400ceddbf88a7d3';
+
 module.exports = (knex) => {
 
-  router.get("/", (req, res) => {
+  /*router.get("/", (req, res) => {
     const countStr = 'select resource_id from resources'
     knex
       .select("*")
@@ -57,7 +58,7 @@ module.exports = (knex) => {
           //res.render("index", {resources: results, categories: results2, countlikes: result3})
       });
     });
-  });
+  });*/
 
   router.get("/search", (req, res) => {
     const query = req.query.queryStr;
@@ -82,30 +83,32 @@ module.exports = (knex) => {
 
   router.get("/:resourceid/comments", (req, res) => {
     const resource_id = req.params.resourceid;
+    const userIds = [];
     knex
       .select("*")
-      .from("comments")
+      .from("resources")
       .where("resource_id", resource_id )
-      .then((comments) => {
+      .then((resources) => {
         knex
-        .select("*")
-        .from("resources")
-        .where("resource_id", resource_id )
-        .then((resources) => {
-          knex
           .select("*")
-          .from("users")
-          .whereIn("id", function(){
-            this.select('user_id').from('comments').where("resource_id", resource_id);
-          })
-          .then((users)=> {
-            let userObj = utility.createObj(users, comments);
-            return res.render("comments", {comments, resources, userObj});
-        })
-
+          .from("comments")
+          .where("resource_id", resource_id )
+          .then((comments) => {
+            for (let comment of comments){
+              userIds.push(comment.user_id);
+            }
+            knex
+              .select("*")
+              .from("users")
+              .whereIn("id", userIds)
+              .then((users)=> {
+                let commentsObj = utility.createCommentsObj(users, comments);
+                return res.render("comments", {commentsObj, resources});
+              })
+          });
+        });
       });
-    });
-  });
+
 
 
   router.get("/:resourceid/likes", (req, res) => {
@@ -138,16 +141,15 @@ module.exports = (knex) => {
             .select("url")
             .from("resources")
             .where("resource_id", resource_id )
-            .then((results3) => {            
+            .then((results3) => {
               const url = results3[0];
-              console.log('url is ', url);
               res.render('tagCategory',{
                 resource_id: resource_id,
                 category: category,
                 url: url
               })
             })
-          })    
+          })
       })
   });
 
@@ -193,7 +195,7 @@ module.exports = (knex) => {
           resource_id: req.params.resource_id
         })
         .then(res.redirect('/'));
-  });    
+  });
 
   router.post("/:resource_id/comments", (req, res) => {
 
@@ -206,7 +208,7 @@ module.exports = (knex) => {
       resource_id: req.params.resource_id,
       user_id: user_id
     })
-    .then(res.redirect('/'));
+    .then(res.redirect(`/resources/${req.params.resource_id}/comments`));
 
   });
 

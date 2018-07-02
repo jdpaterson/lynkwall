@@ -10,11 +10,16 @@ $(document).ready(function() {
   $.get('/api/v1/likes/resources', resIds, function(likes){
     for (let like of likes){
       const resCard = $(`[data-resource_id="${rating.resource_id}"]`);
-
-
-
     }
   })*/
+
+  $.get('/api/v1/categories/', resIds, function(categories){
+    for (let cat of categories){
+      $('#categoriesMenu').append(
+        `<li><a href="/categories/${cat.category_id}/resources">${cat.category}</a></li>`
+      );
+    }
+  });
 
   $.get('/api/v1/likes/resources/user', resIds, function(likes){
     for (let like of likes){

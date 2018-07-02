@@ -1,66 +1,82 @@
 <!doctype html>
 <html lang="en">
 <% include partials/_head %>
-<body>
-<% include partials/_top-bar %>
-
-<div >
-    <div class="grid-x grid-margin-x grid-padding-x grid-padding-y" >
+  <body>
+    <% include partials/_top-bar %>
+    <% include partials/_newResource.ejs %>
+    <div class="grid-container" style="margin-top:1em">
+      <div class="grid-y grid-padding-y" >
         <% for (let res of resources){ %>
-
-          <div class="card cell big-3"  style="width: 300px;">
-            <div class="card-divider">
-                <h4><%= res.title %></h4>
-            </div>
-            <img class="thumbnail" alt="Resource image" src="http://via.placeholder.com/150x150" />
-            <div class="card-divider card-section" style="background:white; border:1px solid lightgrey;">
-              <p><%= res.description %></p>
-              <!-- <a class="button expanded" target="_blank" href="<%=res.URL %>" >Read More</a> -->
-            </div>
-            <div style="display: flex; padding-left:15px; ">
-                <a data-res_id="<%=res.resource_id%>" class="like-button ">
-                    <i class="far fa-thumbs-up "></i>
-                </a>
-                <span><i class="far fa-star"></i></span>
-            </div>
- 
+        <div class="resource-card card cell" data-resource_id="<%=res.resource_id%>" >
+          <div class="card-divider">
+            <h4><%= res.title %></h4>
           </div>
+          <img class="thumbnail" alt="Resource image" src="<%=res.image_url%>" />
+          <div class="cell card-divider card-section" style="background:white; border:1px solid lightgrey;">
+            <p><%= res.description %></p>
+            <!-- <a class="button expanded" target="_blank" href="<%=res.URL %>" >Read More</a> -->
+          </div>
+            <div class="our-icons" style="margin-left:33%;width:33%;" >
+              <div class="rating float-left" >
+                <label>
+                  <input type="radio" value="5" title="5 stars"> 5
+                </label>
+                <label>
+                  <input type="radio" value="4" title="4 stars"> 4
+                </label>
+                <label>
+                  <input type="radio" value="3" title="3 stars"> 3
+                </label>
+                <label>
+                  <input type="radio" value="2" title="2 stars"> 2
+                </label>
+                <label>
+                  <input type="radio" value="1" title="1 star"> 1
+                </label>
+              </div>
+              <div class="float-right">
+                <a data-res_id="<%=res.resource_id%>" class="like-button">
+                  <i class="far fa-thumbs-up"></i>
+                </a>
+                <a class="tag-button"  data-open="tagCategoryForm" href="#">
+                  <i class="fas fa-tags"></i>
+                </span>
+              </div>
+            </div>
+        </div>
         <% } %>
-        </div>
-   
-  <div class="grid-x grid-margin-x grid-padding-x grid-padding-y comment-section" style="display: flex; flex-direction:column; padding:40px;">
-      <h3>Comments (<%= Object.keys(userObj).length %>)</h3>
-  <% for (let index in userObj ){ %>
-     
-  <div class="author">
-    <img src="https://placehold.it/50x50" alt="">
-    <div class="name1">
-      <h5><a href=""><%= userObj[index].userName%></a></h5>
-       
-    </div>
-  </div>
-  <div class="text">
-    <p><%=userObj[index].commentText%></p>
-  </div>
- 
- 
- 
-<% } %>
-<form  action="/resources/<%=resources[0].resource_id%>/comments"
-  method="POST">
-    <div class="box">
-      <div class="row">
-        <div class="small-12 medium-6 larg-6 column" style="border:1px solid lightgrey;">
-          <h4>Leave a Comment</h4>
-          <label>Comment
-            <textarea rows="5" name="comment_text" type="text" style="width:98%; margin: 0 auto;"></textarea>
-          </label>
-          <button class="button expanded" style="width:10%; margin: 0 auto; border-radius: 2px;">Submit</button>
-        </div>
       </div>
+
+    <div class="comment-section" style="display: flex; flex-direction:column; padding:40px;">
+      <h3>Comments (<%= Object.keys(commentsObj).length %>)</h3>
+      <% for (let index in commentsObj ){ %>
+        <% console.log(commentsObj[index]); %>
+        <div class="author">
+        <img src="https://placehold.it/50x50" alt="">
+        <div class="name1">
+        <h5><a href=""><%= commentsObj[index].userName%></a></h5>
+        </div>
+        </div>
+        <div class="text">
+        <p><%=commentsObj[index].commentText%></p>
+        </div>
+        <% } %>
+        <form  action="/resources/<%=resources[0].resource_id%>/comments"
+        method="POST">
+        <div class="box">
+          <div class="row">
+            <div class="small-12 medium-6 larg-6 column" style="border:1px solid lightgrey;">
+              <h4>Leave a Comment</h4>
+              <label>Comment
+                <textarea rows="5" name="comment_text" type="text" style="width:98%; margin: 0 auto;"></textarea>
+              </label>
+              <button class="button expanded" style="width:10%; margin: 0 auto; border-radius: 2px;">Submit</button>
+            </div>
+          </div>
+        </div>
+        </form>
     </div>
-  </form>
-
-</div>
-
- 
+  </div>
+   <% include partials/_footerScripts %>
+</body>
+</html>
