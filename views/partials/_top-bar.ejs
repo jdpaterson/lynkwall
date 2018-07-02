@@ -6,13 +6,8 @@
       <li ><a href="/">Browse</a></li>
       <li class="has-submenu">
         <a href="#0">Categories</a>
-        <ul class="menu" data-submenu>
-            <% if (locals.categories !== undefined) { %>
-              <% for (cat of locals.categories){ %>
-              <li><a href="/categories/<%=cat.category_id%>/resources"><%=cat.category%></a></li>
-              <% } %>
-            <% } %>
-          </ul>
+        <ul id="categoriesMenu" class="menu" data-submenu>
+        </ul>
       </li>
       <li><a href="/users/<%=loggedInUserId%>/resources">My Resources</a></li>
       <li><a id="newResourceBtn" data-open="newResourceForm" href="#">New</a></li>

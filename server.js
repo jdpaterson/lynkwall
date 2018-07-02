@@ -55,17 +55,10 @@ app.get("/", (req, res) => {
   .select("*")
   .from("resources")
   .then((resources) => {
-    knex
-    .select("*")
-    .from("categories")
-    .then((categories) => {
-      //return res.json({results, results2});
       res.render("index",
       {
         resources: resources,
-        categories: categories
-      });
-    });
+      });    
   });
 });
 
