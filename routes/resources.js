@@ -20,8 +20,7 @@ module.exports = (knex) => {
       .orWhere("url", "like", `%${query}%`)
       .then((resources) => {
         res.render("index", {
-          resources: resources,
-          categories: categories
+          resources: resources,          
         })
       })
   })
