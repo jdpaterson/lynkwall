@@ -5,17 +5,19 @@ These functionalities are powered by a robust set of SQL queries.
 
 ## Screenshots
 
-![Add links](https://i.imgur.com/ZUY6vil.gif)
 
 ### Resources can be any URL on the internet. Add anything you want!
 
-![Search!](https://imgur.com/XN6vU2m.gif)
-### Search for resources added by your or other users!
+![Add links](https://i.imgur.com/ZUY6vil.gif)
 
+
+### Search for resources added by you or other users!
+![Search!](https://imgur.com/XN6vU2m.gif)
+
+### Rate resources that you like! Comment on other resources!
 
 ![Comment and rate](https://i.imgur.com/6RpXEP6.gif)
 
-### Rate resources that you like! Comment on other resources!
 
 
 
