@@ -1,5 +1,5 @@
 # Lynkwall
-Lynkwall is a a full stack web application built using Node and Express that allows users organize resources they find on the internet. Users are able to add their own resources or like other users resources. They can also search for resources that have already been added to the system. 
+Lynkwall is a a full stack web application built using Node and Express that allows users organize resources they find on the internet. Users are able to add their own resources or like other users' resources. They can also search for resources that have already been added to the system. 
 
 These functionalities are powered by a robust set of SQL queries.
 
