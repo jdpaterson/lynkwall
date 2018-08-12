@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('resources', function (table) {
-      table.increments('resource_id');
+      table.increments();
       table.string('url');
       table.string('title');
       table.text('description');
