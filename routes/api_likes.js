@@ -14,7 +14,8 @@ module.exports = (knex) => {
       });
   });
 
-  router.get("/resources/user", (req, res) => {
+  //Get likes by user_id
+  router.get("/resources/:user_id", (req, res) => {
 
     const resIds = [];
     for (let resId in req.query){
