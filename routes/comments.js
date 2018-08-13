@@ -4,7 +4,7 @@ const express = require('express');
 const router  = express.Router();
 
 
-module.exports = (knex) => {
+module.exports = knex => {
 
   router.get("/:userid", (req, res) => {
     const userid = req.params.userid;
@@ -12,12 +12,14 @@ module.exports = (knex) => {
       .select("*")
       .from("comments")
       .where("user_id", userid)
-      .then((results) => {
+      .then( results => {
         res.json(results);
         //res.render("index", {resources: results})
-
       })
-    })
+      .catch( err => {
+        console.log(err);
+      })
+  })
 
   router.get("/:resourceId", (req, res) => {
     const resourceId = req.params.resourceId;
@@ -26,16 +28,19 @@ module.exports = (knex) => {
       .from("resources")
       .where("id", resourceId)
       .then((results) => {
-        knex
+        return knex
         .select("*")
         .from("comments")
         .where("resource_id", resourceId)
-        .then((results2) => {
-          return res.json({results, results2});
-          //res.render("index", {resources: results})
-      });
-    });
-  });
+      })
+      .then( results2 => {
+        return res.json({results, results2});
+        //res.render("index", {resources: results})
+      })
+      .catch( err => {
+        console.log(err)
+      })
+  })
 
   return router;
 }

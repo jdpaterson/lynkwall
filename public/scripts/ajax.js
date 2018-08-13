@@ -13,24 +13,23 @@ $(document).ready(function() {
     }
   })*/
 
-  $.get('./api/v1/categories/', resIds, function(categories){
-    console.log('CATEGORIES: ', categories);
+  $.get('/api/v1/categories/', categories => {
     for (let cat of categories){
       $('#categoriesMenu').append(
-        `<li><a href="./categories/${cat.id}/resources">${cat.category}</a></li>`
+        `<li><a href="/categories/${cat.id}/resources">${cat.category}</a></li>`
       );
     }
-  });
+  })
 
-  $.get('./api/v1/likes/resources/user', resIds, function(likes){
+  $.get('/api/v1/likes/resources/user', function(likes){
     for (let like of likes){
       const likeAnchor = $(`[data-res_id="${like.resource_id}"]`);
       likeAnchor.children('i').toggleClass('far');
       likeAnchor.children('i').addClass('fas');
     }
-  });
+  })
 
-  $.get('./api/v1/ratings/resources/user', resIds, function(ratings){
+  $.get('/api/v1/ratings/resources/user', resIds, function(ratings){
     for (let rating of ratings){
       const resCard = $(`[data-resource_id="${rating.resource_id}"]`);
       const rate = rating.rating;
@@ -70,7 +69,7 @@ $(document).ready(function() {
         // userid: 1
       };
 
-      $.post(`./resources/${data.resourceid}/likes`, data);
+      $.post(`/resources/${data.resourceid}/likes`, data);
       $(ev.delegateTarget).children('i').toggleClass('far');
       $(ev.delegateTarget).children('i').toggleClass('fas');
   });
@@ -82,7 +81,7 @@ $(document).ready(function() {
     const rating = $(this).val();
     $(this).parent().siblings().removeClass('selected');
     $(this).parent().addClass('selected');
-    $.post(`./resources/${resId}/rating`, {resourceId: resId, rating: rating});
+    $.post(`/resources/${resId}/rating`, {resourceId: resId, rating: rating});
   });
 
   $('.fa-tags').on('click', function(){

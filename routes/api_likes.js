@@ -9,10 +9,13 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("likes")
-      .then((likes) => {
+      .then( likes => {
         res.json(likes);
-      });
-  });
+      })
+      .catch( err => {
+        console.log(err)
+      })
+  })
 
   //Get likes by user_id
   router.get("/resources/:user_id", (req, res) => {
@@ -27,8 +30,11 @@ module.exports = (knex) => {
       .from("likes")
       .whereIn("resource_id", resIds )
       .andWhere("user_id", 1)
-      .then((likes) => {
+      .then( likes => {
         res.json(likes);
+      })
+      .catch( err => {
+        console.log(err)
       })
   })
 
@@ -43,8 +49,11 @@ module.exports = (knex) => {
       .select("*")
       .from("likes")
       .whereIn("resource_id", resIds )
-      .then((likes) => {
+      .then( likes => {
         res.json(likes);
+      })
+      .catch( err => {
+        console.log(err)
       })
   })
 

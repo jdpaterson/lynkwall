@@ -7,46 +7,54 @@ module.exports = (knex) => {
 
   router.get("/:category_id/resources", (req, res) => {
     const categoryId = req.params.category_id;
-    const myQuery =
+    let resources = [];
     knex
       .select("*")
       .from("categories_resources")
       .where("category_id", categoryId)
-      .then((categories_resources) => {
+      .then( categories_resources => {
         const resource_ids = [];
         for (let cat of categories_resources){
           resource_ids.push(cat.resource_id);
         }
-        knex
+        return knex
           .select("*")
           .from("resources")
           .whereIn("id", resource_ids)
-          .then((resources) => {
-            knex.select("*")
-              .from("categories")
-              .then((categories) => {
-                res.render('index', {
-                  resources: resources,
-                  categories: categories
-                });
-              })
+      })
+      .then( qResources => {
+        resources = qResources;
+        return knex.select("*")
+          .from("categories")
+      })
+      .then( categories => {
+        res.render('index', {
+          resources,
+          categories
+        })
+      })
+      .catch( err => {
+        console.log(err)
+      })
 
-          })
+  })
 
-
-      });
-    });
-
-    router.post("/:resourceid/new", (req, res) => {
-      const resource_id = req.params.resourceid;
-      //const category_id; //todo here
-      knex('categories')
-        .insert({
-          category_id: req.body.created_on,
-          resource_id: resource_id
-        }).then((result)=>{
+  router.post("/:resourceid/new", (req, res) => {
+    const resource_id = req.params.resourceid;
+    //const category_id; //todo here
+    knex('categories')
+      .insert({
+        category_id: req.body.created_on,
+        resource_id: resource_id
+      })
+      .then( result => {
         res.redirect('/');
-      });
-   });
+      })
+      .catch( err => {
+        console.log(err)
+      })
+  })
+
   return router;
+
 }
