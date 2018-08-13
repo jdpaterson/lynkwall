@@ -13,7 +13,7 @@ $(document).ready(function() {
     }
   })*/
 
-  $.get('/api/v1/categories/', resIds, function(categories){
+  $.get('./api/v1/categories/', resIds, function(categories){
     console.log('CATEGORIES: ', categories);
     for (let cat of categories){
       $('#categoriesMenu').append(
@@ -22,7 +22,7 @@ $(document).ready(function() {
     }
   });
 
-  $.get('/api/v1/likes/resources/user', resIds, function(likes){
+  $.get('./api/v1/likes/resources/user', resIds, function(likes){
     for (let like of likes){
       const likeAnchor = $(`[data-res_id="${like.resource_id}"]`);
       likeAnchor.children('i').toggleClass('far');
@@ -30,7 +30,7 @@ $(document).ready(function() {
     }
   });
 
-  $.get('/api/v1/ratings/resources/user', resIds, function(ratings){
+  $.get('./api/v1/ratings/resources/user', resIds, function(ratings){
     for (let rating of ratings){
       const resCard = $(`[data-resource_id="${rating.resource_id}"]`);
       const rate = rating.rating;
