@@ -17,7 +17,7 @@ $(document).ready(function() {
     console.log('CATEGORIES: ', categories);
     for (let cat of categories){
       $('#categoriesMenu').append(
-        `<li><a href="/categories/${cat.id}/resources">${cat.category}</a></li>`
+        `<li><a href="./categories/${cat.id}/resources">${cat.category}</a></li>`
       );
     }
   });
@@ -70,7 +70,7 @@ $(document).ready(function() {
         // userid: 1
       };
 
-      $.post(`/resources/${data.resourceid}/likes`, data);
+      $.post(`./resources/${data.resourceid}/likes`, data);
       $(ev.delegateTarget).children('i').toggleClass('far');
       $(ev.delegateTarget).children('i').toggleClass('fas');
   });
@@ -82,7 +82,7 @@ $(document).ready(function() {
     const rating = $(this).val();
     $(this).parent().siblings().removeClass('selected');
     $(this).parent().addClass('selected');
-    $.post(`/resources/${resId}/rating`, {resourceId: resId, rating: rating});
+    $.post(`./resources/${resId}/rating`, {resourceId: resId, rating: rating});
   });
 
   $('.fa-tags').on('click', function(){
