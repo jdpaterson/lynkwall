@@ -1,3 +1,5 @@
+@import 'settings';
+@import '../node_modules/foundation-sites/scss/foundation';
 @import 'partials/comments';
 @import 'partials/ratings';
-@import 'partials/index';
+@include foundation-everything;
