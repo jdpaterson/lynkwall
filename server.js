@@ -1,7 +1,7 @@
 "use strict";
 
 require('dotenv').config();
-
+const path        = require('path');
 const PORT        = process.env.PORT || 8080;
 const ENV         = process.env.ENV || "development";
 const express     = require("express");
@@ -39,7 +39,7 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
-
+app.use('/js', express.static(path.join(__dirname, './node_modules/foundation-sites/dist/js')));
 // Mount all resource routes
 
 app.use("/resources", resourcesRoutes(knex));
@@ -58,7 +58,7 @@ app.get("/", (req, res) => {
       res.render("index",
       {
         resources: resources,
-      });    
+      });
   });
 });
 
