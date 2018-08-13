@@ -9,10 +9,13 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("categories")
-      .then((categories) => {
+      .then( categories => {
         res.json(categories);
-      });
-  });
+      })
+      .catch( err => {
+        console.log(err)
+      })
+  })
 
   return router;
 

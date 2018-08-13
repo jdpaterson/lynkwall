@@ -14,7 +14,9 @@ module.exports = (knex) => {
       .then((results) => {
         res.json(results);
         //res.render("index", {resources: results})
-
+      })
+      .catch( err => {
+        console.log(err)
       })
     })
 
@@ -26,8 +28,8 @@ module.exports = (knex) => {
       .where("resource_id", resource_id )
       .then((results) => {
         res.json(results);
-    });
-  });  
+      })
+  })
 
   return router;
 }

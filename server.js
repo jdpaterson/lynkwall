@@ -32,7 +32,8 @@ app.use(knexLogger(knex));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-app.use('/js', express.static(path.join(__dirname, './node_modules/foundation-sites/dist/js')));
+console.log(__dirname);
+app.use('/js', express.static(path.join(__dirname, '/node_modules/foundation-sites/dist/js')));
 // Mount all resource routes
 
 app.use("/resources", resourcesRoutes(knex));
@@ -47,13 +48,10 @@ app.get("/", (req, res) => {
   knex
   .select("*")
   .from("resources")
-  .then((resources) => {
-      res.render("index",
-      {
-        resources: resources,
-      });
-  });
-});
+  .then( resources => {
+      res.render("index", { resources })
+  })
+})
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

@@ -9,9 +9,12 @@ module.exports = (knex) => {
       knex
         .select("*")
         .from("ratings")
-        .then((ratings) => {
+        .then( ratings => {
           res.json(ratings);
-        });
+        })
+        .catch( err => {
+          console.log(err)
+        })
     })
 
     router.get("/resources/user", (req, res) => {
@@ -26,8 +29,11 @@ module.exports = (knex) => {
         .from("ratings")
         .whereIn("resource_id", resIds )
         .andWhere("user_id", 1)
-        .then((likes) => {
+        .then( likes => {
           res.json(likes);
+        })
+        .catch( err => {
+          console.log(err)
         })
     })
 
