@@ -3862,7 +3862,7 @@ a.thumbnail {
   margin-top: -3px; }
 
 .dropdown.menu a {
-  background: #fefefe;
+  background: #e6e6e6;
   padding: 0.7rem 1rem; }
   [data-whatinput='mouse'] .dropdown.menu a {
     outline: 0; }
@@ -4063,7 +4063,7 @@ a.thumbnail {
   display: none;
   min-width: 200px;
   border: 1px solid #cacaca;
-  background: #fefefe; }
+  background: #e6e6e6; }
   .dropdown .is-dropdown-submenu a {
     padding: 0.7rem 1rem; }
   .is-dropdown-submenu .is-dropdown-submenu-parent > a::after {
