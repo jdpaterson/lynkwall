@@ -14,7 +14,6 @@ module.exports = knex => {
       .where("user_id", userid)
       .then( results => {
         res.json(results);
-        //res.render("index", {resources: results})
       })
       .catch( err => {
         console.log(err);
@@ -23,19 +22,20 @@ module.exports = knex => {
 
   router.get("/:resourceId", (req, res) => {
     const resourceId = req.params.resourceId;
+    let resources = [];
+
     knex
       .select("*")
       .from("resources")
       .where("id", resourceId)
-      .then((results) => {
+      .then( resources => {
         return knex
         .select("*")
         .from("comments")
         .where("resource_id", resourceId)
       })
-      .then( results2 => {
-        return res.json({results, results2});
-        //res.render("index", {resources: results})
+      .then( comments => {
+        return res.json({resources, comments});
       })
       .catch( err => {
         console.log(err)

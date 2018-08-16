@@ -32,13 +32,13 @@ module.exports = (knex) => {
     const resource_id = req.params.resourceid;
     const userIds = [];
     let comments = [];
-    let resources = [];
+    let resource = {};
     knex
       .select("*")
       .from("resources")
       .where("id", resource_id )
       .then( qResources => {
-        resources = qResources;
+        resource = qResources[0];
         return knex
           .select("*")
           .from("comments")
@@ -55,10 +55,8 @@ module.exports = (knex) => {
           .whereIn("id", userIds)
       })
       .then( qUsers => {
-        console.log('RESOURCES: ', resources);
-        console.log('COMMENTS: ', comments);
         let commentsObj = utility.createCommentsObj(qUsers, comments);
-        return res.render("comments", {commentsObj, resources});
+        return res.render("comments", {commentsObj, resource});
       })
       .catch( err => {
         console.log(err)
@@ -75,7 +73,6 @@ module.exports = (knex) => {
       .where("resource_id", resource_id )
       .then( results => {
         res.json(results);
-        // res.render("index", {resources: results})
       })
       .catch( err => {
         console.log(err)
@@ -154,7 +151,7 @@ module.exports = (knex) => {
 
   router.post("/:resource_id/comments", (req, res) => {
 
-    const now = moment().format('YYYY MM DD');
+    const now = moment();
     knex("comments")
     .insert({
       comment_text: req.body.comment_text,
@@ -173,7 +170,7 @@ module.exports = (knex) => {
   router.post("/:resourceid/likes", (req, res) => {
 
     const resId = req.params.resourceid;
-    const now = moment().format("YYYY MM DD");
+    const now = moment();
 
     //If a like exists then delete it , else add a new one.
     knex

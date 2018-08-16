@@ -14,25 +14,21 @@
 .comment-section {
   background-color: #eee;
   padding: 2em; }
-  .comment-section author {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem; }
-    .comment-section author name {
-      margin-left: 1rem; }
-      .comment-section author name p {
-        margin-bottom: 0; }
-  .comment-section box {
-    background-color: #aaa;
-    padding: 2em; }
-  .comment-section .card-divider {
-    justify-content: space-around;
-    margin: 1em 10em 1em 10em; }
 
-.thumbnail {
-  width: 30%;
-  height: 50%;
-  margin: auto; }
+.comment-box {
+  background-color: #eee;
+  padding: 2em; }
+
+.resource-image {
+  display: flex;
+  justify-content: center;
+  margin: 1em; }
+  .resource-image img {
+    height: 250px;
+    width: 250px; }
+
+.ratings-likes {
+  padding: 1em; }
 
 .rating {
   unicode-bidi: bidi-override;

@@ -4,20 +4,19 @@
   <body>
     <% include partials/_top-bar %>
     <% include partials/_newResource.ejs %>
-    <div class="grid-container" style="margin-top:1em">
-      <div class="grid-y grid-padding-y" >
-        <% for (let res of resources){ %>
-        <div class="resource-card card cell" data-resource_id="<%=res.resource_id%>" >
+      <div class="resource-main grid-x align-center" style="margin-top: 2em;">
+        <div class="resource-card card cell large-6" data-resource_id="<%=resource.id%>" >
           <div class="card-divider">
-            <h4><%= res.title %></h4>
+            <h4><%= resource.title %></h4>
           </div>
-          <img class="thumbnail" alt="Resource image" src="<%=res.image_url%>" />
-          <div class="cell card-divider card-section" style="background:white; border:1px solid lightgrey;">
-            <p><%= res.description %></p>
-            <!-- <a class="button expanded" target="_blank" href="<%=res.URL %>" >Read More</a> -->
+          <div class="resource-image" >
+            <img alt="Resource image" src="<%=resource.image_url%>" />
           </div>
-            <div class="our-icons" style="margin-left:33%;width:33%;" >
-              <div class="rating float-left" >
+          <div class="cell card-divider card-section" >
+            <p><%= resource.description %></p>
+          </div>
+            <div class="ratings-likes grid-x grid-padding-x align-center" >
+              <div class="cell shrink rating " >
                 <label>
                   <input type="radio" value="5" title="5 stars"> 5
                 </label>
@@ -34,8 +33,8 @@
                   <input type="radio" value="1" title="1 star"> 1
                 </label>
               </div>
-              <div class="float-right">
-                <a data-res_id="<%=res.resource_id%>" class="like-button">
+              <div class="cell shrink ">
+                <a data-res_id="<%=resource.id%>" class="like-button">
                   <i class="far fa-thumbs-up"></i>
                 </a>
                 <a class="tag-button"  data-open="tagCategoryForm" href="#">
@@ -44,38 +43,34 @@
               </div>
             </div>
         </div>
-        <% } %>
       </div>
-
-    <div class="comment-section" style="display: flex; flex-direction:column; padding:40px;">
-      <h3>Comments (<%= Object.keys(commentsObj).length %>)</h3>
-      <% for (let index in commentsObj ){ %>
-        <% console.log(commentsObj[index]); %>
-        <div class="author">
-        <img src="https://placehold.it/50x50" alt="">
-        <div class="name1">
-        <h5><a href=""><%= commentsObj[index].userName%></a></h5>
-        </div>
-        </div>
-        <div class="text">
-        <p><%=commentsObj[index].commentText%></p>
-        </div>
-        <% } %>
-        <form  action="/resources/<%=resources[0].id%>/comments"
-        method="POST">
-        <div class="box">
-          <div class="row">
-            <div class="small-12 medium-6 larg-6 column" style="border:1px solid lightgrey;">
-              <h4>Leave a Comment</h4>
-              <label>Comment
-                <textarea rows="5" name="comment_text" type="text" style="width:98%; margin: 0 auto;"></textarea>
-              </label>
-              <button class="button expanded" style="width:10%; margin: 0 auto; border-radius: 2px;">Submit</button>
+      <div class="grid-x align-center" >
+        <div class="cell large-6 comment-section" >
+          <h3>Comments (<%= Object.keys(commentsObj).length %>)</h3>
+          <% for (let index in commentsObj ){ %>
+            <div class="author">
+              <img src="https://placehold.it/50x50" alt="">
+              <h5><a href=""><%= commentsObj[index].userName%></a></h5>
             </div>
-          </div>
+            <div class="text">
+              <p><%=commentsObj[index].commentText%></p>
+            </div>
+            <% } %>
+            <form
+              action="/resources/<%=resource.id%>/comments"
+              method="POST">
+            <div class="comment-box">
+              <div class="small-12 medium-6 large-6">
+                <h4>Leave a Comment</h4>
+                <label>Comment
+                  <textarea rows="5" name="comment_text" type="text" ></textarea>
+                </label>
+                <button class="button" >Submit</button>
+              </div>
+            </div>
+            </form>
         </div>
-        </form>
-    </div>
+      </div>
   </div>
    <% include partials/_footerScripts %>
 </body>

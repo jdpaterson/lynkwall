@@ -32,7 +32,6 @@ app.use(knexLogger(knex));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-console.log(__dirname);
 app.use('/js', express.static(path.join(__dirname, '/node_modules/foundation-sites/dist/js')));
 // Mount all resource routes
 
