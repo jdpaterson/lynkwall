@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const userId = 1;
 
 module.exports = (knex) => {
 
@@ -18,18 +19,12 @@ module.exports = (knex) => {
   })
 
   //Get likes by user_id
-  router.get("/resources/:user_id", (req, res) => {
+  router.get("/user/:user_id", (req, res) => {
 
-    const resIds = [];
-    for (let resId in req.query){
-      resIds.push(req.query[resId]);
-    }
-
-    knex
+    return knex
       .select("*")
       .from("likes")
-      .whereIn("resource_id", resIds )
-      .andWhere("user_id", 1)
+      .where("user_id", userId)
       .then( likes => {
         res.json(likes);
       })

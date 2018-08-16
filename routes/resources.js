@@ -63,10 +63,9 @@ module.exports = (knex) => {
       })
     })
 
-
-
   router.get("/:resourceid/likes", (req, res) => {
     const resource_id = req.params.resourceid;
+
     knex
       .count("like_id")
       .from("likes")
@@ -168,20 +167,18 @@ module.exports = (knex) => {
   })
 
   router.post("/:resourceid/likes", (req, res) => {
-
     const resId = req.params.resourceid;
     const now = moment();
-
     //If a like exists then delete it , else add a new one.
-    knex
+    return knex
       .select("*")
       .from("likes")
       .where({
         user_id: user_id,
         resource_id: resId
       })
-      .then( results => {
-        if (results.length === 0){
+      .then( qLikes => {
+        if (qLikes.length === 0){
           return knex("likes")
             .insert({
               resource_id: resId,
@@ -198,6 +195,8 @@ module.exports = (knex) => {
         }
       })
       .then( res => {
+        console.log('RESULT:');
+        console.log(res);
         return res;
       })
       .catch( err  => {
