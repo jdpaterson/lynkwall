@@ -50,11 +50,11 @@ module.exports = (knex) => {
           userIds.push(comment.user_id);
         }
         return knex
-          .select("*")
+          .select()
           .from("users")
           .whereIn("id", userIds)
       })
-      .then( qUsers => {
+      .then( qUsers => {        
         let commentsObj = utility.createCommentsObj(qUsers, comments);
         return res.render("comments", {commentsObj, resource});
       })
@@ -195,8 +195,6 @@ module.exports = (knex) => {
         }
       })
       .then( res => {
-        console.log('RESULT:');
-        console.log(res);
         return res;
       })
       .catch( err  => {

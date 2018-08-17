@@ -17,7 +17,7 @@ $(document).ready(function() {
   })
 
   // Get whether the user has liked any resources before
-  $.get(`/api/v1/likes/user/${userId}`, function(likes){    
+  $.get(`/api/v1/likes/user/${userId}`, function(likes){
     for (let like of likes){
       const likeAnchor = $(`[data-res_id="${like.resource_id}"]`);
       likeAnchor.children('i').toggleClass('far');
@@ -25,7 +25,7 @@ $(document).ready(function() {
     }
   })
 
-
+  // Get the user's previous ratings
   $.get('/api/v1/ratings/resources/user', resIds, function(ratings){
     for (let rating of ratings){
       const resCard = $(`[data-resource_id="${rating.resource_id}"]`);

@@ -36,10 +36,7 @@
               <div class="cell shrink ">
                 <a data-res_id="<%=resource.id%>" class="like-button">
                   <i class="far fa-thumbs-up"></i>
-                </a>
-                <a class="tag-button"  data-open="tagCategoryForm" href="#">
-                  <i class="fas fa-tags"></i>
-                </span>
+                </a>                
               </div>
             </div>
         </div>
@@ -48,26 +45,28 @@
         <div class="cell large-6 comment-section" >
           <h3>Comments (<%= Object.keys(commentsObj).length %>)</h3>
           <% for (let index in commentsObj ){ %>
-            <div class="author">
-              <img src="https://placehold.it/50x50" alt="">
-              <h5><a href=""><%= commentsObj[index].userName%></a></h5>
+            <div class="comment" >
+              <div class="author">
+                <img src="https://placehold.it/75x75" alt="">
+                <span class="h4" href=""><%= commentsObj[index].userName%></span>
+              </div>
+              <div class="text">
+                <p><%=commentsObj[index].commentText%></p>
+              </div>
             </div>
-            <div class="text">
-              <p><%=commentsObj[index].commentText%></p>
-            </div>
-            <% } %>
+              <% } %>
             <form
               action="/resources/<%=resource.id%>/comments"
               method="POST">
-            <div class="comment-box">
-              <div class="small-12 medium-6 large-6">
-                <h4>Leave a Comment</h4>
-                <label>Comment
-                  <textarea rows="5" name="comment_text" type="text" ></textarea>
-                </label>
-                <button class="button" >Submit</button>
+              <div class="comment-box">
+                <div class="small-12 medium-6 large-6">
+                  <h4>Leave a Comment</h4>
+                  <label>Comment
+                    <textarea rows="5" name="comment_text" type="text" ></textarea>
+                  </label>
+                  <button class="button" >Submit</button>
+                </div>
               </div>
-            </div>
             </form>
         </div>
       </div>
