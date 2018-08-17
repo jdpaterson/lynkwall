@@ -4,6 +4,21 @@
   <body>
     <% include partials/_top-bar %>
     <% include partials/_newResource.ejs %>
+    <p>
+      <button class="float-button" data-open="introModal">
+        <i class="fas fa-question"></i>
+      </button>
+    </p>
+    <div class="small reveal" id="introModal" data-reveal>
+      <h1>Welcome to LynkWall</h1>
+      <p>LynkWall is a place where you can preview any website by viewing
+        the image, title and description of that website. You can also rate, like, and comment on links
+        that you or others have posted.
+      </p>
+      <p>
+        Click on the &quot;New&quot; tab to get started!
+      <p>
+    </div>
     <div class="grid-container " style="margin-top:1em">
       <div class="grid-x grid-margin-x grid-padding-x " data-equalizer data-equalize-on="medium">
         <% if (locals.resources === undefined){ %>
