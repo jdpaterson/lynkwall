@@ -35,6 +35,11 @@ $(document).ready(function() {
     }
   })
 
+  // If the user hasn't visited the page, then show the help modal
+  if ($('#visited').val() === 'false'){    
+    $('#introModal').foundation('open');
+  }
+
   $('#primary-menu').on(
   'show.zf.dropdownmenu', function() {
     var dropdown = $(this).find('.is-dropdown-submenu');

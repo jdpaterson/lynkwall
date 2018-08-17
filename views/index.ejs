@@ -4,11 +4,15 @@
   <body>
     <% include partials/_top-bar %>
     <% include partials/_newResource.ejs %>
-    <p>
-      <button class="float-button" data-open="introModal">
-        <i class="fas fa-question"></i>
-      </button>
-    </p>
+    <% console.log(locals.session); %>
+    <% console.log(locals.session.views > 1); %>
+    <% const visited = locals.session.views > 1 ? true : false %> 
+    <input id="visited" type="hidden" value="<%=locals.session.views > 1%>" />
+
+    <button class="float-button" data-open="introModal">
+      <i class="fas fa-question"></i>
+    </button>
+
     <div class="small reveal" id="introModal" data-reveal>
       <h1>Welcome to LynkWall</h1>
       <p>LynkWall is a place where you can preview any website by viewing
@@ -114,7 +118,9 @@
         <% } %>
         </div>
     </div>
+
    <% include partials/_footerScripts %>
    <% include partials/_footer %>
+
   </body>
 </html>
