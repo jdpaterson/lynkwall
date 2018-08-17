@@ -1,40 +1,41 @@
 $light-gray: #aaa;
 $white: #eee;
 $global-padding: 2em;
-$comment-form-bg: $light-gray;
 $comment-section-bg: $white;
 $comment-section-padding: $global-padding;
 
 .comment-section {
   background-color: $comment-section-bg;
   padding: $global-padding;
-
-  author {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-  
-    name {
-      margin-left: 1rem;
-  
-      p {
-        margin-bottom: 0;
-      }
+  .author {
+    color: $primary-color;
+    img {
+      height: 75px;
+      width: 75px;
+      margin: 1em;
     }
   }
-  box {
-    background-color: $comment-form-bg;
-    padding: $global-padding;
-  }
-  .card-divider {
-    justify-content: space-around;
-    margin:1em 10em 1em 10em;
+  .text {
+    margin-left: 2em;
   }
 }
 
-.thumbnail {
-  width: 30%;
-  height: 50%;
-  margin:auto;
+.comment-box {
+  background-color: $comment-section-bg;
+  padding: $global-padding;
 }
 
+.resource-image {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+
+  img {
+    height: 250px;
+    width: 250px;
+  }
+}
+
+.ratings-likes {
+  padding: 1em;
+}

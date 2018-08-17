@@ -14,14 +14,14 @@
 
         <div class="resource-card card cell small-12 medium-6 large-3" data-resource_id="<%=res.id%>">
           <div class="grid-y" style="height:32em;" >
-            <div class="card-header cell 2 card-divider" data-equalizer-watch>
-             <h5 class="subheader">
+            <div class="card-header card-divider grid-x align-center" data-equalizer-watch>
+             <h3 class="h5 subheader">
                <% if (res.title.length > 20){ %>
-                 <%= res.title.substring(0,20) %>...
+                 <%= res.title.substring(0,15) %>...
                  <% }else{ %>
                  <%= res.title %>
                  <% } %>
-               </h5>
+               </h3>
             </div>
             <div class="cell auto" style="display:flex;align-items:center;" >
               <img alt="Resource image" class="float-center" style="max-height:125px;max-width:150px;" src="<%=res.image_url%>" />
@@ -36,7 +36,7 @@
             </div>
             <div class="cell ">
               <a class="text-center button expanded" target="_blank" href="<%=res.url %>" >Go to Link </a>
-              <div class="our-icons" style="margin-left: 2em;display: flex; justify-content: space-between;">
+              <div class="our-icons" style="display: flex; justify-content: space-around;">
                 <div class="rating">
                   <label>
                     <input type="radio" value="5" title="5 stars"> 5
@@ -58,15 +58,17 @@
                   <a data-res_id="<%=res.id%>" class="like-button">
                     <i class="far fa-thumbs-up"></i>
                   </a>
-                  <a class="tag-button" >
-                    <i class="fas fa-tags"></i>
-                  </span>
+
                 </div>
               </div>
               <p class="text-center">
                 <a href="./resources/<%=res.id%>/comments" style="" >View Comments</a>
               </p>
-              <div class="hiddenDiv" style="background-color:white;" hidden>
+              <!-- TODO: Categories functionality needs to be reinstated at some point -->
+              <!--span class="tag-button" >
+                <i class="fas fa-tags"></i>
+              </span-->
+              <!--div class="hiddenDiv" style="background-color:white;" hidden>
                 <form method="POST" action="./resources/<%=res.id%>/categories">
                   <div class="grid-container grid-container-padded">
                     <div class="grid-y grid-padding-y">
@@ -89,7 +91,7 @@
                     </div>
                   </div>
                 </form>
-              </div>
+              </div-->
             </div>
           </div>
         </div>

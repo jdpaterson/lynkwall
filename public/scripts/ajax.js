@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  const userId = 1;
   const resCards = $(".resource-card");
   const resIds = {};
 
@@ -6,13 +7,7 @@ $(document).ready(function() {
     resIds[i] = resCards[i].dataset.resource_id;
   }
 
-  /* TODO GET LIKE COUNT
-  $.get('/api/v1/likes/resources', resIds, function(likes){
-    for (let like of likes){
-      const resCard = $(`[data-resource_id="${rating.resource_id}"]`);
-    }
-  })*/
-
+  //Get all categories
   $.get('/api/v1/categories/', categories => {
     for (let cat of categories){
       $('#categoriesMenu').append(
@@ -21,7 +16,8 @@ $(document).ready(function() {
     }
   })
 
-  $.get('/api/v1/likes/resources/user', function(likes){
+  // Get whether the user has liked any resources before
+  $.get(`/api/v1/likes/user/${userId}`, function(likes){
     for (let like of likes){
       const likeAnchor = $(`[data-res_id="${like.resource_id}"]`);
       likeAnchor.children('i').toggleClass('far');
@@ -29,6 +25,7 @@ $(document).ready(function() {
     }
   })
 
+  // Get the user's previous ratings
   $.get('/api/v1/ratings/resources/user', resIds, function(ratings){
     for (let rating of ratings){
       const resCard = $(`[data-resource_id="${rating.resource_id}"]`);
@@ -66,10 +63,13 @@ $(document).ready(function() {
       let data = {
         resourceid: ev.delegateTarget.dataset.res_id,
         userid: loggedInUserId
-        // userid: 1
+        //userid: 1
       };
-
-      $.post(`/resources/${data.resourceid}/likes`, data);
+      $.ajax({
+        type: 'POST',
+        url: `/resources/${data.resourceid}/likes`,
+        data: data
+      })
       $(ev.delegateTarget).children('i').toggleClass('far');
       $(ev.delegateTarget).children('i').toggleClass('fas');
   });

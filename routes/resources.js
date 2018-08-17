@@ -32,13 +32,13 @@ module.exports = (knex) => {
     const resource_id = req.params.resourceid;
     const userIds = [];
     let comments = [];
-    let resources = [];
+    let resource = {};
     knex
       .select("*")
       .from("resources")
       .where("id", resource_id )
       .then( qResources => {
-        resources = qResources;
+        resource = qResources[0];
         return knex
           .select("*")
           .from("comments")
@@ -50,32 +50,28 @@ module.exports = (knex) => {
           userIds.push(comment.user_id);
         }
         return knex
-          .select("*")
+          .select()
           .from("users")
           .whereIn("id", userIds)
       })
-      .then( qUsers => {
-        console.log('RESOURCES: ', resources);
-        console.log('COMMENTS: ', comments);
+      .then( qUsers => {        
         let commentsObj = utility.createCommentsObj(qUsers, comments);
-        return res.render("comments", {commentsObj, resources});
+        return res.render("comments", {commentsObj, resource});
       })
       .catch( err => {
         console.log(err)
       })
     })
 
-
-
   router.get("/:resourceid/likes", (req, res) => {
     const resource_id = req.params.resourceid;
+
     knex
       .count("like_id")
       .from("likes")
       .where("resource_id", resource_id )
       .then( results => {
         res.json(results);
-        // res.render("index", {resources: results})
       })
       .catch( err => {
         console.log(err)
@@ -154,7 +150,7 @@ module.exports = (knex) => {
 
   router.post("/:resource_id/comments", (req, res) => {
 
-    const now = moment().format('YYYY MM DD');
+    const now = moment();
     knex("comments")
     .insert({
       comment_text: req.body.comment_text,
@@ -171,20 +167,18 @@ module.exports = (knex) => {
   })
 
   router.post("/:resourceid/likes", (req, res) => {
-
     const resId = req.params.resourceid;
-    const now = moment().format("YYYY MM DD");
-
+    const now = moment();
     //If a like exists then delete it , else add a new one.
-    knex
+    return knex
       .select("*")
       .from("likes")
       .where({
         user_id: user_id,
         resource_id: resId
       })
-      .then( results => {
-        if (results.length === 0){
+      .then( qLikes => {
+        if (qLikes.length === 0){
           return knex("likes")
             .insert({
               resource_id: resId,
