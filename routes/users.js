@@ -44,10 +44,11 @@ module.exports = knex => {
           .select("*")
           .from("categories")
       })
-      .then( categories => {
+      .then( categories => {        
         res.render("index", {
            resources,
-           categories
+           categories,
+           session: req.session
         })
       })
       .catch( err => {
