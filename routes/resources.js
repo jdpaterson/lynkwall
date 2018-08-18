@@ -54,7 +54,7 @@ module.exports = (knex) => {
           .from("users")
           .whereIn("id", userIds)
       })
-      .then( qUsers => {        
+      .then( qUsers => {
         let commentsObj = utility.createCommentsObj(qUsers, comments);
         return res.render("comments", {commentsObj, resource});
       })
@@ -229,7 +229,7 @@ module.exports = (knex) => {
               resource_id: resource_id,
               user_id: user_id,
               rating: newRating,
-              created_on: now
+              created_on: moment()
             })
         }
       })
