@@ -47,8 +47,7 @@ app.use("/api/v1/ratings", apiRatingsRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  req.session.views = (req.session.views || 0) + 1
-  console.log(req.session);
+  req.session.views = (req.session.views || 0) + 1  
   knex
   .select("*")
   .from("resources")

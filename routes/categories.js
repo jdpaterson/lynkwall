@@ -30,7 +30,8 @@ module.exports = (knex) => {
       .then( categories => {
         res.render('index', {
           resources,
-          categories
+          categories,
+          session: req.session
         })
       })
       .catch( err => {
